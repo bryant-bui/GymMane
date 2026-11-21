@@ -9,6 +9,7 @@ import 'package:phosphoricons_flutter/phosphoricons_flutter.dart';
 
 import '../catalog/body_art.dart';
 import '../catalog/exercise_catalog.dart';
+import '../catalog/program_templates.dart';
 import '../app/desktop.dart';
 import '../l10n/l10n.dart';
 import '../services/device_kind.dart';
@@ -118,7 +119,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       final id = fit.addPlace(t.placePresetName(preset), equipment: {...gear, 'Bodyweight'});
       if (id.isNotEmpty) first ??= id;
     }
+    if (first == null && fit.places.isEmpty) {
+      final preset = kPlacePresets.first;
+      final id = fit.addPlace(
+        t.placePresetName(preset),
+        equipment: {...?kPlacePresetGear[preset], 'Bodyweight'},
+      );
+      if (id.isNotEmpty) first = id;
+    }
     if (first != null && fit.activePlaceId != first) fit.setActivePlace(first);
+    if (fit.routines.isEmpty && kProgramTemplates.isNotEmpty) {
+      fit.applyTemplate(kProgramTemplates.first);
+    }
     if (_slow) {
       fit.setPerfLevel(_blur ? 'balanced' : 'lite');
       fit.setBlur(_blur);

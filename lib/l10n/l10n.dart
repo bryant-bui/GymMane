@@ -151,6 +151,9 @@ extension GymL10n on AppLocalizations {
         'stronglifts' => tplStronglifts,
         'startingstrength' => tplStartingstrength,
         'rr' => tplRr,
+        'pb-push' => tplPbPush,
+        'pb-pull' => tplPbPull,
+        'pb-squat' => tplPbSquat,
         _ => tplHome,
       };
 

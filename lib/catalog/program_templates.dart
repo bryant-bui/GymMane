@@ -1,9 +1,45 @@
+class ProgramExercise {
+  const ProgramExercise(
+    this.name,
+    this.sets, {
+    this.reps,
+    this.repsMax,
+    this.sec,
+    this.rest,
+    this.superset = false,
+    this.note = '',
+  });
+
+  final String name;
+  final int sets;
+  final int? reps;
+  final int? repsMax;
+  final int? sec;
+  final int? rest;
+  final bool superset;
+  final String note;
+
+  bool get hasPlan => reps != null || repsMax != null || sec != null;
+}
+
 class ProgramDay {
-  const ProgramDay(this.name, this.exercises, {this.weekday});
+  const ProgramDay(
+    this.name,
+    this.exercises, {
+    this.weekday,
+    this.details = const [],
+    this.ladders = const [],
+  });
 
   final String name;
   final List<(String, int)> exercises;
   final int? weekday;
+  final List<ProgramExercise> details;
+  final List<List<String>> ladders;
+
+  List<ProgramExercise> get entries => details.isNotEmpty
+      ? details
+      : [for (final (name, sets) in exercises) ProgramExercise(name, sets)];
 }
 
 class ProgramTemplate {
@@ -15,6 +51,140 @@ class ProgramTemplate {
 }
 
 const List<ProgramTemplate> kProgramTemplates = [
+  ProgramTemplate('pb-push', 'Playbook · One-Arm Push-Ups', [
+    ProgramDay('Push-Ups · Level 1', [], details: [
+      ProgramExercise('Negative Push-Ups', 3, reps: 6, repsMax: 8, rest: 120, note: 'Tempo 4s eccentric · Lên L2 khi đạt đủ 3×8'),
+      ProgramExercise('Scapula Push-Ups', 4, reps: 8, rest: 120, note: 'Tempo 2010'),
+      ProgramExercise('Plank Hold', 4, sec: 60, rest: 120),
+    ], ladders: [
+      ['scapular-push-up', 'negative-push-up', 'I4hDWkc', 'wide-push-up', 'x6KpKpq', 'bodyweight-tricep-extension', 'wigSg76', 'A9qxk2F', 'one-arm-push-up'],
+    ]),
+    ProgramDay('Push-Ups · Level 2', [], details: [
+      ProgramExercise('Normal Push-ups', 3, reps: 8, repsMax: 12, rest: 120, note: 'Tempo 2010 · Lên L3 khi đạt 12 reps'),
+      ProgramExercise('Negative Push-Ups', 3, reps: 6, repsMax: 8, rest: 120, note: 'Tempo 4s eccentric'),
+      ProgramExercise('Scapula Push-Ups', 4, reps: 8, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Plank Hold', 4, sec: 60, rest: 180),
+    ], ladders: [
+      ['scapular-push-up', 'negative-push-up', 'I4hDWkc', 'wide-push-up', 'x6KpKpq', 'bodyweight-tricep-extension', 'wigSg76', 'A9qxk2F', 'one-arm-push-up'],
+    ]),
+    ProgramDay('Push-Ups · Level 3', [], details: [
+      ProgramExercise('Tricep Extensions', 3, reps: 8, rest: 120, note: 'Tempo 2010 · Khởi động kỹ cổ tay'),
+      ProgramExercise('Diamond Push-Ups', 3, reps: 12, repsMax: 15, rest: 120, note: 'Tempo 2010'),
+      ProgramExercise('Wide Push-Ups', 3, reps: 6, rest: 90, note: 'Tempo 2010'),
+      ProgramExercise('Normal Push-ups', 3, reps: 8, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Negative Push-Ups', 3, reps: 4, rest: 180, note: 'Tempo 4s eccentric'),
+    ], ladders: [
+      ['scapular-push-up', 'negative-push-up', 'I4hDWkc', 'wide-push-up', 'x6KpKpq', 'bodyweight-tricep-extension', 'wigSg76', 'A9qxk2F', 'one-arm-push-up'],
+    ]),
+    ProgramDay('Push-Ups · Level 4', [], details: [
+      ProgramExercise('Archer Push-Ups', 5, reps: 2, rest: 120, note: 'Tempo 2010 · mỗi tay (each arm)'),
+      ProgramExercise('Explosive Push-Ups', 3, reps: 6, rest: 120, note: 'Tempo 1010'),
+      ProgramExercise('Diamond Push-Ups', 3, reps: 10, rest: 120, note: 'Tempo 2010'),
+      ProgramExercise('Normal Push-ups', 5, reps: 10, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Plank Hold', 5, sec: 60, rest: 180, note: 'Giữ chuẩn 60s để lên L5'),
+    ], ladders: [
+      ['scapular-push-up', 'negative-push-up', 'I4hDWkc', 'wide-push-up', 'x6KpKpq', 'bodyweight-tricep-extension', 'wigSg76', 'A9qxk2F', 'one-arm-push-up'],
+    ]),
+    ProgramDay('Push-Ups · Level 5', [], details: [
+      ProgramExercise('One-Arm Push-Ups', 3, reps: 1, rest: 120, note: 'Tempo 2010 · mỗi tay (each arm)'),
+      ProgramExercise('Archer Push-Ups', 5, reps: 4, superset: true, note: 'Tempo 2010 · mỗi tay (each arm)'),
+      ProgramExercise('Normal Push-ups', 5, reps: 6, rest: 120, note: 'Tempo 2010'),
+      ProgramExercise('Diamond Push-Ups', 4, reps: 5, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Wide Push-Ups', 4, reps: 5, rest: 180, note: 'Tempo 2010'),
+    ], ladders: [
+      ['scapular-push-up', 'negative-push-up', 'I4hDWkc', 'wide-push-up', 'x6KpKpq', 'bodyweight-tricep-extension', 'wigSg76', 'A9qxk2F', 'one-arm-push-up'],
+    ]),
+  ]),
+  ProgramTemplate('pb-pull', 'Playbook · Pull-Ups', [
+    ProgramDay('Pull-Ups · Warm-up', [], details: [
+      ProgramExercise('Banded Overhead Pull-Aparts', 2, reps: 12, repsMax: 15, rest: 60, note: 'Khởi động dây kháng lực · Giữ tay thẳng, không nhún vai'),
+      ProgramExercise('Banded Horizontal Pull-Aparts', 2, reps: 12, repsMax: 15, rest: 60, note: 'Kéo ngang ngực, siết bả vai'),
+      ProgramExercise('Banded Pull-Downs', 2, reps: 12, repsMax: 15, rest: 60, note: 'Kích hoạt cơ xô trước khi vào bài chính'),
+    ]),
+    ProgramDay('Pull-Ups · Level 1', [], details: [
+      ProgramExercise('Bent Over Barbell Rows', 3, reps: 12, repsMax: 15, superset: true, note: 'Tempo 2010 · Lên L2 khi đạt 30–40 kg & hang 60s'),
+      ProgramExercise('Passive Hang', 3, sec: 60, rest: 180, note: '30–60s'),
+    ], ladders: [
+      ['eZyBC3j', 'dead-hang-hold', 'uTBt1HV', 'incline-row', 'kiJ4Z2K', 'negative-pull-up', 'lBDjFxJ'],
+    ]),
+    ProgramDay('Pull-Ups · Level 2', [], details: [
+      ProgramExercise('Australian Pull-Ups', 3, reps: 10, repsMax: 12, superset: true, note: 'Tempo 2010 · Hạ xà gần ngang để lên L3'),
+      ProgramExercise('Scapula Pull-Ups', 3, reps: 10, repsMax: 12, rest: 180, note: 'Tempo 2010'),
+    ], ladders: [
+      ['eZyBC3j', 'dead-hang-hold', 'uTBt1HV', 'incline-row', 'kiJ4Z2K', 'negative-pull-up', 'lBDjFxJ'],
+    ]),
+    ProgramDay('Pull-Ups · Level 3', [], details: [
+      ProgramExercise('Band Assisted Pull-Ups', 3, reps: 4, repsMax: 6, rest: 180, note: 'Tempo 2010 · Dây mỏng ~10 kg để lên L4'),
+      ProgramExercise('Australian Pull-Ups', 4, reps: 10, repsMax: 12, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Scapula Pull-Ups', 4, reps: 10, repsMax: 12, rest: 180, note: 'Tempo 2010'),
+    ], ladders: [
+      ['eZyBC3j', 'dead-hang-hold', 'uTBt1HV', 'incline-row', 'kiJ4Z2K', 'negative-pull-up', 'lBDjFxJ'],
+    ]),
+    ProgramDay('Pull-Ups · Level 4', [], details: [
+      ProgramExercise('Negative Pull-Ups', 5, reps: 1, rest: 60, note: 'Tempo 5–10s eccentric · Đạt 5×1×10s để lên L5'),
+      ProgramExercise('Band Assisted Pull-Ups', 3, reps: 4, repsMax: 6, rest: 180, note: 'Tempo 2010'),
+      ProgramExercise('Australian Pull-Ups', 3, reps: 8, repsMax: 10, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Passive Hang', 3, sec: 30, superset: true),
+      ProgramExercise('Scapula Pull-Ups', 3, reps: 8, repsMax: 10, rest: 180, note: 'Tempo 2010'),
+    ], ladders: [
+      ['eZyBC3j', 'dead-hang-hold', 'uTBt1HV', 'incline-row', 'kiJ4Z2K', 'negative-pull-up', 'lBDjFxJ'],
+    ]),
+    ProgramDay('Pull-Ups · Level 5', [], details: [
+      ProgramExercise('Pull-Ups', 5, reps: 2, rest: 180, note: 'Tempo 2010 · Tăng dần lên 5×3+'),
+      ProgramExercise('Band Assisted Pull-Ups', 3, reps: 8, repsMax: 10, rest: 180, note: 'Tempo 2010'),
+      ProgramExercise('Australian Pull-Ups', 3, reps: 8, repsMax: 10, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Scapula Pull-Ups', 3, reps: 8, repsMax: 10, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Passive Hang', 3, sec: 45, rest: 180, note: '30–45s'),
+    ], ladders: [
+      ['eZyBC3j', 'dead-hang-hold', 'uTBt1HV', 'incline-row', 'kiJ4Z2K', 'negative-pull-up', 'lBDjFxJ'],
+    ]),
+  ]),
+  ProgramTemplate('pb-squat', 'Playbook · Pistol Squats', [
+    ProgramDay('Squats · Warm-up', [], details: [
+      ProgramExercise('Bodyweight Squats', 2, reps: 10, rest: 60, note: 'Khởi động khớp gối & hông'),
+      ProgramExercise('Deep Squats', 2, reps: 8, rest: 60, note: 'Mở biên độ cổ chân & hông trước bài chính'),
+      ProgramExercise('Cossack Squats', 2, reps: 5, rest: 60, note: 'mỗi chân (each leg) · Giãn đùi sau & háng'),
+    ]),
+    ProgramDay('Squats · Level 1', [], details: [
+      ProgramExercise('Deep Squats', 3, reps: 10, repsMax: 12, rest: 120, note: 'Tempo 2010 · Nếu khó hãy tập mobility trước'),
+      ProgramExercise('Narrow Stance Squats', 3, reps: 10, repsMax: 12, rest: 120, note: 'Tempo 2010'),
+      ProgramExercise('Bodyweight Squats', 3, reps: 12, repsMax: 15, rest: 120, note: 'Tempo 2010'),
+    ], ladders: [
+      ['6YUfHPL', 'narrow-stance-squat', 'deep-squat', 'bulgarian-split-squat', 'cossack-squat', 'single-leg-box-squat', 'eccentric-pistol-squat', 'assisted-pistol-squat', 'pistol-squat'],
+    ]),
+    ProgramDay('Squats · Level 2', [], details: [
+      ProgramExercise('Bulgarian Split Squats', 3, reps: 4, repsMax: 6, rest: 180, note: 'Tempo 3010 · mỗi chân (each leg) · Đạt 6 reps để lên L3'),
+      ProgramExercise('Narrow Stance Squats', 3, reps: 8, repsMax: 10, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Deep Squats', 3, reps: 8, repsMax: 10, rest: 180, note: 'Tempo 3010'),
+    ], ladders: [
+      ['6YUfHPL', 'narrow-stance-squat', 'deep-squat', 'bulgarian-split-squat', 'cossack-squat', 'single-leg-box-squat', 'eccentric-pistol-squat', 'assisted-pistol-squat', 'pistol-squat'],
+    ]),
+    ProgramDay('Squats · Level 3', [], details: [
+      ProgramExercise('Cossack Squats', 3, reps: 4, repsMax: 6, rest: 120, note: 'Tempo 2010 · mỗi chân (each leg) · Đạt 6 reps để lên L4'),
+      ProgramExercise('Bulgarian Split Squats', 3, reps: 6, repsMax: 8, rest: 120, note: 'Tempo 2010 · mỗi chân (each leg)'),
+      ProgramExercise('Narrow Stance Squats', 3, reps: 6, repsMax: 8, superset: true, note: 'Tempo 2010'),
+      ProgramExercise('Deep Squats', 3, reps: 6, repsMax: 8, rest: 180, note: 'Tempo 3010'),
+    ], ladders: [
+      ['6YUfHPL', 'narrow-stance-squat', 'deep-squat', 'bulgarian-split-squat', 'cossack-squat', 'single-leg-box-squat', 'eccentric-pistol-squat', 'assisted-pistol-squat', 'pistol-squat'],
+    ]),
+    ProgramDay('Squats · Level 4', [], details: [
+      ProgramExercise('Box Pistol Squats', 3, reps: 6, repsMax: 10, rest: 120, note: 'Tempo 3010 · mỗi chân (hoặc Eccentric / Assisted Pistol) · Đạt 10 reps để lên L5'),
+      ProgramExercise('Cossack Squats', 3, reps: 6, repsMax: 8, rest: 120, note: 'Tempo 2010 · mỗi chân (each leg)'),
+      ProgramExercise('Bulgarian Split Squats', 3, reps: 8, repsMax: 10, rest: 120, note: 'Tempo 2010 · mỗi chân (each leg)'),
+      ProgramExercise('Deep Squats', 3, reps: 10, repsMax: 12, rest: 120, note: 'Tempo 3010'),
+    ], ladders: [
+      ['6YUfHPL', 'narrow-stance-squat', 'deep-squat', 'bulgarian-split-squat', 'cossack-squat', 'single-leg-box-squat', 'eccentric-pistol-squat', 'assisted-pistol-squat', 'pistol-squat'],
+    ]),
+    ProgramDay('Squats · Level 5', [], details: [
+      ProgramExercise('Pistol Squats', 5, reps: 2, rest: 120, note: 'Tempo 2020 · mỗi chân (each leg) · Tăng dần lên 8 reps'),
+      ProgramExercise('Box Pistol Squats', 3, reps: 4, repsMax: 6, rest: 120, note: 'Tempo 3010 · mỗi chân (hoặc Eccentric / Assisted Pistol)'),
+      ProgramExercise('Cossack Squats', 3, reps: 6, repsMax: 8, rest: 120, note: 'Tempo 2010 · mỗi chân (each leg)'),
+      ProgramExercise('Bulgarian Split Squats', 3, reps: 8, repsMax: 10, superset: true, note: 'Tempo 2010 · mỗi chân (each leg)'),
+      ProgramExercise('Deep Squats', 3, reps: 8, repsMax: 10, rest: 180, note: 'Tempo 3010'),
+    ], ladders: [
+      ['6YUfHPL', 'narrow-stance-squat', 'deep-squat', 'bulgarian-split-squat', 'cossack-squat', 'single-leg-box-squat', 'eccentric-pistol-squat', 'assisted-pistol-squat', 'pistol-squat'],
+    ]),
+  ]),
   ProgramTemplate('fullbody', 'Full Body', [
     ProgramDay('Full Body', [
       ('Barbell Squat', 3),

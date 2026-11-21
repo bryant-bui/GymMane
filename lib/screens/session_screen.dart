@@ -2208,6 +2208,10 @@ class SessionScreen extends StatelessWidget {
                       child: Rise(index: 3, child: _levelUpCard(context, gc, fit.summaryLevelUp!)),
                     ),
             ),
+            if (fit.playbookLevelUpHint() case final pbHint?) ...[
+              const SizedBox(height: 10),
+              Rise(index: 3, child: _playbookLevelCard(gc, pbHint)),
+            ],
             if (fit.askCheckIn && fit.filedSession != null) ...[
               const SizedBox(height: 10),
               Rise(index: 3, child: CheckInCard(fit.filedSession!)),
@@ -2514,6 +2518,26 @@ class SessionScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _playbookLevelCard(GymColors gc, ({String title, String body}) hint) => SoftCard(
+        radius: 16,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Icon(PhosphorIconsFill.arrowCircleUp, size: 20, color: gc.sage),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(hint.title, style: AppTheme.f(14, weight: FontWeight.w700, color: gc.text)),
+                const SizedBox(height: 3),
+                Text(hint.body,
+                    style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
+              ],
+            ),
+          ),
+        ]),
+      );
 
   Widget _vsLastCard(GymColors gc, int pct) {
     final up = pct >= 0;

@@ -2546,6 +2546,176 @@ mixin WorkoutState on FitCore, SettingsState, LibraryState, PlacesState, StatsSt
     return '${d ~/ 60}:${(d % 60).toString().padLeft(2, '0')}';
   }
 
+  ({String title, String body})? playbookLevelUpHint() {
+    final r = sessionRoutine;
+    final ls = _filed;
+    if (r == null || ls == null) return null;
+    final vi = appLanguage == 'vi';
+    final byId = {for (final ex in ls.exercises) ex.id: ex.workingSets};
+    bool hit(String id, int sets, {int minReps = 0, int minSec = 0, double minKg = 0}) {
+      final list = byId[id];
+      if (list == null || list.length < sets) return false;
+      return list.take(sets).every((s) =>
+          s.reps >= minReps && (s.sec ?? 0) >= minSec && s.weight >= minKg);
+    }
+
+    final n = r.name.trim();
+    switch (n) {
+      case 'Push-Ups · Level 1':
+        if (hit('negative-push-up', 3, minReps: 8)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Push-Ups · Level 2' : 'Ready for Push-Ups · Level 2',
+            body: vi
+                ? 'Bạn đã hoàn thành 3×8 Negative Push-Ups có kiểm soát.'
+                : 'You completed 3×8 controlled Negative Push-Ups.',
+          );
+        }
+      case 'Push-Ups · Level 2':
+        if (hit('I4hDWkc', 3, minReps: 12)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Push-Ups · Level 3' : 'Ready for Push-Ups · Level 3',
+            body: vi
+                ? 'Bạn đã đạt 12 reps Normal Push-ups.'
+                : 'You reached 12 reps of Normal Push-ups.',
+          );
+        }
+      case 'Push-Ups · Level 3':
+        if (hit('bodyweight-tricep-extension', 3, minReps: 8) &&
+            hit('x6KpKpq', 3, minReps: 12) &&
+            hit('wide-push-up', 3, minReps: 6) &&
+            hit('I4hDWkc', 3, minReps: 8) &&
+            hit('negative-push-up', 3, minReps: 4)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Push-Ups · Level 4' : 'Ready for Push-Ups · Level 4',
+            body: vi
+                ? 'Bạn đã hoàn thành đủ số set và rep của Level 3.'
+                : 'You hit every target set and rep in Level 3.',
+          );
+        }
+      case 'Push-Ups · Level 4':
+        if (hit('A9qxk2F', 5, minReps: 2) &&
+            hit('wigSg76', 3, minReps: 6) &&
+            hit('x6KpKpq', 3, minReps: 10) &&
+            hit('I4hDWkc', 5, minReps: 10) &&
+            hit('plank-hold', 5, minSec: 60)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Push-Ups · Level 5' : 'Ready for Push-Ups · Level 5',
+            body: vi
+                ? 'Bạn đã hoàn thành Level 4 và giữ Plank 60s chuẩn.'
+                : 'You completed Level 4 with a full 60s Plank Hold.',
+          );
+        }
+      case 'Push-Ups · Level 5':
+        if (hit('one-arm-push-up', 3, minReps: 1)) {
+          return (
+            title: vi ? 'Làm chủ Level 5 · One-Arm Push-Ups' : 'Level 5 Mastered · One-Arm Push-Ups',
+            body: vi
+                ? 'Hãy tiếp tục tăng dần số rep One-Arm Push-up mỗi tay.'
+                : 'Keep building up your One-Arm Push-up reps per arm.',
+          );
+        }
+      case 'Pull-Ups · Level 1':
+        if (hit('eZyBC3j', 3, minReps: 12, minKg: 30) &&
+            hit('dead-hang-hold', 3, minSec: 60)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Pull-Ups · Level 2' : 'Ready for Pull-Ups · Level 2',
+            body: vi
+                ? 'Bạn đã đạt Row ≥30 kg và Passive Hang 60s.'
+                : 'You hit ≥30 kg Rows and a 60s Passive Hang.',
+          );
+        }
+      case 'Pull-Ups · Level 2':
+        if (hit('incline-row', 3, minReps: 10) && hit('uTBt1HV', 3, minReps: 10)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Pull-Ups · Level 3' : 'Ready for Pull-Ups · Level 3',
+            body: vi
+                ? 'Khi kéo được Australian Pull-Ups ở góc gần ngang, hãy chuyển sang Level 3.'
+                : 'Once your Australian Pull-Ups are nearly horizontal, move up to Level 3.',
+          );
+        }
+      case 'Pull-Ups · Level 3':
+        if (hit('kiJ4Z2K', 3, minReps: 4) &&
+            hit('incline-row', 4, minReps: 10) &&
+            hit('uTBt1HV', 4, minReps: 10)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Pull-Ups · Level 4' : 'Ready for Pull-Ups · Level 4',
+            body: vi
+                ? 'Nếu bạn đã hoàn thành với dây kháng lực mỏng (~10 kg), hãy lên Level 4.'
+                : 'If you completed this with a thin band (~10 kg), move up to Level 4.',
+          );
+        }
+      case 'Pull-Ups · Level 4':
+        if (hit('negative-pull-up', 5, minReps: 1) && hit('kiJ4Z2K', 3, minReps: 4)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Pull-Ups · Level 5' : 'Ready for Pull-Ups · Level 5',
+            body: vi
+                ? 'Hoàn thành 5 hiệp Negative Pull-Ups 10s là bạn đã sẵn sàng kéo xà chuẩn.'
+                : 'Completing 5 single 10s Negative Pull-Ups means you are ready for strict Pull-Ups.',
+          );
+        }
+      case 'Pull-Ups · Level 5':
+        if (hit('lBDjFxJ', 5, minReps: 2)) {
+          return (
+            title: vi ? 'Làm chủ Level 5 · Pull-Ups' : 'Level 5 Mastered · Pull-Ups',
+            body: vi
+                ? 'Bạn đã đạt 5×2 Pull-Ups! Hãy nâng mục tiêu lên 5×3+ ở buổi sau.'
+                : '5×2 Pull-Ups achieved! Aim for 5×3+ next.',
+          );
+        }
+      case 'Squats · Level 1':
+        if (hit('deep-squat', 3, minReps: 10) &&
+            hit('narrow-stance-squat', 3, minReps: 10) &&
+            hit('6YUfHPL', 3, minReps: 12)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Squats · Level 2' : 'Ready for Squats · Level 2',
+            body: vi
+                ? 'Bạn đã hoàn thành toàn bộ giáo án Squats Level 1.'
+                : 'You completed the full Squats Level 1 routine.',
+          );
+        }
+      case 'Squats · Level 2':
+        if (hit('bulgarian-split-squat', 3, minReps: 6)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Squats · Level 3' : 'Ready for Squats · Level 3',
+            body: vi
+                ? 'Bạn đã đạt 6 reps Bulgarian Split Squats mỗi chân.'
+                : 'You completed 6 reps of Bulgarian Split Squats per leg.',
+          );
+        }
+      case 'Squats · Level 3':
+        if (hit('cossack-squat', 3, minReps: 6) &&
+            hit('bulgarian-split-squat', 3, minReps: 6)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Squats · Level 4' : 'Ready for Squats · Level 4',
+            body: vi
+                ? 'Bạn đã đạt 6 reps Cossack Squats! Hãy chuyển sang biến thể Pistol dễ.'
+                : 'You hit 6 reps of Cossack Squats! Start Pistol Squat easier variants.',
+          );
+        }
+      case 'Squats · Level 4':
+        if (hit('single-leg-box-squat', 3, minReps: 10) ||
+            hit('assisted-pistol-squat', 3, minReps: 10) ||
+            hit('eccentric-pistol-squat', 3, minReps: 4)) {
+          return (
+            title: vi ? 'Đủ chuẩn lên Squats · Level 5' : 'Ready for Squats · Level 5',
+            body: vi
+                ? 'Bạn đã đạt 10 reps biến thể Pistol dễ! Sẵn sàng thử Pistol Squat chuẩn.'
+                : 'You hit 10 reps of an easier Pistol variant! Ready for unassisted Pistol Squats.',
+          );
+        }
+      case 'Squats · Level 5':
+        if (hit('pistol-squat', 5, minReps: 2)) {
+          return (
+            title: vi ? 'Làm chủ Level 5 · Pistol Squats' : 'Level 5 Mastered · Pistol Squats',
+            body: vi
+                ? 'Hãy tăng dần lên 8 reps Pistol Squats mỗi chân.'
+                : 'Gradually build up to 8 reps of Pistol Squats per leg.',
+          );
+        }
+    }
+    return null;
+  }
+
   void saveAndExit() {
     _holdTimer?.cancel();
     holdEndsAt = null;

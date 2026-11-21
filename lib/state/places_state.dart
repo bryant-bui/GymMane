@@ -1,11 +1,11 @@
 part of 'fit_state.dart';
 
-const List<String> kPlacePresets = ['gym', 'home', 'outdoors'];
+const List<String> kPlacePresets = ['outdoors', 'home', 'gym'];
 
 const Map<String, List<String>> kPlacePresetGear = {
-  'gym': kEquipment,
+  'outdoors': ['Bodyweight', 'Rings', 'Band', 'Weighted'],
   'home': ['Bodyweight', 'Dumbbell', 'Kettlebell', 'Band', 'Weighted'],
-  'outdoors': ['Bodyweight', 'Band'],
+  'gym': kEquipment,
 };
 
 mixin PlacesState on FitCore, LibraryState {

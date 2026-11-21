@@ -8489,6 +8489,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get nutritionCopyAllHint => 'Also your workout, weight and health data';
+
+  @override
+  String get tplPbPush => 'Playbook · Push-Ups (Lv 1–5)';
+
+  @override
+  String get tplPbPull => 'Playbook · Pull-Ups (Lv 1–5)';
+
+  @override
+  String get tplPbSquat => 'Playbook · Squats (Lv 1–5)';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).

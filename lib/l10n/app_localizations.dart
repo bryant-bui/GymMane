@@ -15499,6 +15499,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Also your workout, weight and health data'**
   String get nutritionCopyAllHint;
+
+  /// No description provided for @tplPbPush.
+  ///
+  /// In en, this message translates to:
+  /// **'Playbook · Push-Ups (Lv 1–5)'**
+  String get tplPbPush;
+
+  /// No description provided for @tplPbPull.
+  ///
+  /// In en, this message translates to:
+  /// **'Playbook · Pull-Ups (Lv 1–5)'**
+  String get tplPbPull;
+
+  /// No description provided for @tplPbSquat.
+  ///
+  /// In en, this message translates to:
+  /// **'Playbook · Squats (Lv 1–5)'**
+  String get tplPbSquat;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

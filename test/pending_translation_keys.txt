@@ -134,3 +134,6 @@ nutritionCopyAllHint
 jumpSet
 jumpSetHint
 jumpSetLink
+tplPbPush
+tplPbPull
+tplPbSquat

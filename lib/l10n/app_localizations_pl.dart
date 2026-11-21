@@ -92,7 +92,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String exerciseCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n ćwiczeń', one: '$n ćwiczenie');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n ćwiczeń',
+      one: '$n ćwiczenie',
+    );
     return '$_temp0';
   }
 
@@ -160,7 +165,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String startCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n ĆWICZEŃ', one: '$n ĆWICZENIE');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n ĆWICZEŃ',
+      one: '$n ĆWICZENIE',
+    );
     return 'START · $_temp0';
   }
 
@@ -747,8 +757,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get places => 'MOJE MIEJSCA';
 
   @override
-  String get placesHint =>
-      'Podaj sprzęt dostępny w każdym miejscu, a biblioteka pokaże tylko to, co możesz tam wykonać.';
+  String get placesHint => 'Podaj sprzęt dostępny w każdym miejscu, a biblioteka pokaże tylko to, co możesz tam wykonać.';
 
   @override
   String get placeAll => 'Wszędzie';
@@ -771,8 +780,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get placeEmptyTitle => 'Trenuj, gdziekolwiek jesteś';
 
   @override
-  String get placeEmptyBody =>
-      'Miejsce to lista sprzętu, który masz w danej lokalizacji. Wybierz jedno na początek i edytuj później.';
+  String get placeEmptyBody => 'Miejsce to lista sprzętu, który masz w danej lokalizacji. Wybierz jedno na początek i edytuj później.';
 
   @override
   String get placeDeleteTitle => 'Usuń miejsce';
@@ -843,8 +851,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get noteEmptyTitle => 'Jeszcze nic nie zapisano';
 
   @override
-  String get noteEmptyBody =>
-      'Wskazówki, plany na następny raz, odczucia po treningu. Opcjonalnie ze zdjęciami lub filmem.';
+  String get noteEmptyBody => 'Wskazówki, plany na następny raz, odczucia po treningu. Opcjonalnie ze zdjęciami lub filmem.';
 
   @override
   String get noteNoneForExercise => 'Brak notatek do tego ćwiczenia.';
@@ -1132,8 +1139,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get shareCompare => 'Przed / po';
 
   @override
-  String get shareHint =>
-      'Karta powstaje na telefonie. Nic go nie opuszcza, dopóki nie wybierzesz, gdzie ją wysłać.';
+  String get shareHint => 'Karta powstaje na telefonie. Nic go nie opuszcza, dopóki nie wybierzesz, gdzie ją wysłać.';
 
   @override
   String get shareFailed => 'Nie udało się utworzyć karty';
@@ -1199,7 +1205,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String setCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n serii', one: '$n seria');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n serii',
+      one: '$n seria',
+    );
     return '$_temp0';
   }
 
@@ -1249,8 +1260,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get newRoutineName => 'Nowy plan';
 
   @override
-  String get dragToReorder =>
-      'Przeciągnij uchwyt z kropkami, aby zmienić kolejność, w tej kolejności trenujesz.';
+  String get dragToReorder => 'Przeciągnij uchwyt z kropkami, aby zmienić kolejność, w tej kolejności trenujesz.';
 
   @override
   String reorderHandle(String name) {
@@ -1278,8 +1288,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get resetTitle => 'Usunąć wszystko?';
 
   @override
-  String get resetBody =>
-      'Treningi, rekordy, plany, notatki i profil. Tego nie można cofnąć: najpierw wyeksportuj kopię zapasową, jeśli możesz ich potrzebować.';
+  String get resetBody => 'Treningi, rekordy, plany, notatki i profil. Tego nie można cofnąć: najpierw wyeksportuj kopię zapasową, jeśli możesz ich potrzebować.';
 
   @override
   String get resetConfirm => 'Usuń wszystko';
@@ -1413,8 +1422,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get importBackup => 'Importuj kopię zapasową';
 
   @override
-  String get importHint =>
-      'Wybierz kopię .zip (lub starszy .json) wyeksportowaną z GymMane. Zastąpi ona bieżące dane, w tym multimedia.';
+  String get importHint => 'Wybierz kopię .zip (lub starszy .json) wyeksportowaną z GymMane. Zastąpi ona bieżące dane, w tym multimedia.';
 
   @override
   String get import => 'Importuj';
@@ -1475,8 +1483,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get autofills => 'Automatycznie uzupełnia kalkulatory';
 
   @override
-  String get onbUnitsWhy =>
-      'Do ciężarów, wymiarów i dystansów. Możesz to zmienić w każdej chwili w Ustawieniach.';
+  String get onbUnitsWhy => 'Do ciężarów, wymiarów i dystansów. Możesz to zmienić w każdej chwili w Ustawieniach.';
 
   @override
   String get nameLabel => 'IMIĘ';
@@ -1817,22 +1824,25 @@ class AppLocalizationsPl extends AppLocalizations {
   String get calculatorsInside => '10 kalkulatorów';
 
   @override
-  String get calculatorsInsideWhy =>
-      '1RM, talerze, BMI, kalorie, tkanka tłuszczowa, FFMI, rozgrzewka, ciężar według RPE i punktacje siły DOTS i Wilks, wszystko na podstawie opublikowanych wzorów.';
+  String get calculatorsInsideWhy => '1RM, talerze, BMI, kalorie, tkanka tłuszczowa, FFMI, rozgrzewka, ciężar według RPE i punktacje siły DOTS i Wilks, wszystko na podstawie opublikowanych wzorów.';
 
   @override
   String get mathInside => 'Przejrzyste obliczenia';
 
   @override
-  String get mathInsideWhy =>
-      'Objętość, rekordy i serie są liczone z twoich danych. Nic nie jest tylko ozdobą.';
+  String get mathInsideWhy => 'Objętość, rekordy i serie są liczone z twoich danych. Nic nie jest tylko ozdobą.';
 
   @override
   String get streakCaps => 'SERIA';
 
   @override
   String daysUnit(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: 'dni', one: 'dzień');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: 'dni',
+      one: 'dzień',
+    );
     return '$_temp0';
   }
 
@@ -1943,8 +1953,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get continueWorkout => 'KONTYNUUJ';
 
   @override
-  String get continueWorkoutBody =>
-      'Trening zostanie wznowiony z już zaznaczonymi seriami. Po ponownym zakończeniu zostanie zapisany z pierwotną datą.';
+  String get continueWorkoutBody => 'Trening zostanie wznowiony z już zaznaczonymi seriami. Po ponownym zakończeniu zostanie zapisany z pierwotną datą.';
 
   @override
   String get addBodyWidget => 'Dodaj widżet mapy mięśni';
@@ -2015,7 +2024,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String platesOwned(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n rozmiarów', one: '$n rozmiar');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n rozmiarów',
+      one: '$n rozmiar',
+    );
     return '$_temp0';
   }
 
@@ -2088,8 +2102,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get filters => 'Filtry';
 
   @override
-  String get setsPlannedHint =>
-      'Wybierz liczbę serii dla każdego ćwiczenia. Trening otworzy się z gotowym planem.';
+  String get setsPlannedHint => 'Wybierz liczbę serii dla każdego ćwiczenia. Trening otworzy się z gotowym planem.';
 
   @override
   String get nextTime => 'NASTĘPNYM RAZEM';
@@ -2122,8 +2135,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get dimStrong => 'Mocne';
 
   @override
-  String get bgPhotoHint =>
-      'Pojawia się za całym interfejsem, przyciemnione, aby aplikacja pozostała czytelna.';
+  String get bgPhotoHint => 'Pojawia się za całym interfejsem, przyciemnione, aby aplikacja pozostała czytelna.';
 
   @override
   String get reminderSmart => 'Inteligentne';
@@ -2132,8 +2144,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get reminderFixed => 'Stała godzina';
 
   @override
-  String get reminderSmartHint =>
-      'Używa dni i godzin, w których faktycznie trenujesz, i milczy, jeśli tego dnia trening już był.';
+  String get reminderSmartHint => 'Używa dni i godzin, w których faktycznie trenujesz, i milczy, jeśli tego dnia trening już był.';
 
   @override
   String get reminderSmartEmpty => 'Zapisz jeszcze kilka treningów, aby aplikacja poznała twoje nawyki.';
@@ -2197,7 +2208,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String dayCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n dni', one: '$n dzień');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n dni',
+      one: '$n dzień',
+    );
     return '$_temp0';
   }
 
@@ -2217,8 +2233,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get supersetUnlink => 'Odłącz od następnego';
 
   @override
-  String get supersetHint =>
-      'Bez odpoczynku między połączonymi ćwiczeniami, przechodzisz od razu do następnego.';
+  String get supersetHint => 'Bez odpoczynku między połączonymi ćwiczeniami, przechodzisz od razu do następnego.';
 
   @override
   String get jumpSet => 'Jump set';
@@ -2233,8 +2248,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get aiRoutine => 'Plan z AI';
 
   @override
-  String get aiIntro =>
-      'GymMane nigdy nie łączy się bezpośrednio z AI. Eksportujesz listę ćwiczeń, wklejasz ją do używanego asystenta, a potem importujesz jego odpowiedź. Nic samo nie opuszcza telefonu.';
+  String get aiIntro => 'GymMane nigdy nie łączy się bezpośrednio z AI. Eksportujesz listę ćwiczeń, wklejasz ją do używanego asystenta, a potem importujesz jego odpowiedź. Nic samo nie opuszcza telefonu.';
 
   @override
   String aiMissing(int n) {
@@ -2509,12 +2523,15 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String badgeName(String id) {
-    String _temp0 = intl.Intl.selectLogic(id, {
-      'gold': 'Złota',
-      'blue': 'Niebieska',
-      'green': 'Zielona',
-      'other': 'Odznaka',
-    });
+    String _temp0 = intl.Intl.selectLogic(
+      id,
+      {
+        'gold': 'Złota',
+        'blue': 'Niebieska',
+        'green': 'Zielona',
+        'other': 'Odznaka',
+      },
+    );
     return '$_temp0';
   }
 
@@ -2546,13 +2563,16 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String heatToneName(String id) {
-    String _temp0 = intl.Intl.selectLogic(id, {
-      'ember': 'Żar',
-      'green': 'Zielony',
-      'blue': 'Niebieski',
-      'mono': 'Szary',
-      'other': 'Kolor',
-    });
+    String _temp0 = intl.Intl.selectLogic(
+      id,
+      {
+        'ember': 'Żar',
+        'green': 'Zielony',
+        'blue': 'Niebieski',
+        'mono': 'Szary',
+        'other': 'Kolor',
+      },
+    );
     return '$_temp0';
   }
 
@@ -2582,8 +2602,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get momentsEmptyHint =>
-      'Zrób zdjęcie siłowni, tablicy, załadowanej sztangi. Czegokolwiek, co chcesz zapamiętać. Zostaje na telefonie i tylko ty je widzisz.';
+  String get momentsEmptyHint => 'Zrób zdjęcie siłowni, tablicy, załadowanej sztangi. Czegokolwiek, co chcesz zapamiętać. Zostaje na telefonie i tylko ty je widzisz.';
 
   @override
   String get awardStreak100Line => 'Sto dni z rzędu. To już nie motywacja, to nawyk.';
@@ -2687,8 +2706,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get demoLoopShort => '10 sekund';
 
   @override
-  String get demoLoopHint =>
-      'Porusza się przez około 10 sekund i zatrzymuje w pozycji wyjściowej. Stuknij demo, aby obejrzeć je ponownie.';
+  String get demoLoopHint => 'Porusza się przez około 10 sekund i zatrzymuje w pozycji wyjściowej. Stuknij demo, aby obejrzeć je ponownie.';
 
   @override
   String get alarmStyleTitle => 'Po końcu przerwy';
@@ -2703,8 +2721,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get alarmStyleVibrate => 'Tylko wibracje';
 
   @override
-  String get alarmStyleHint =>
-      '„Zawsze dzwoń” używa głośności alarmu, nawet w trybie cichym. „Szanuj tryb cichy” używa głośności powiadomień i tylko wibruje, gdy telefon jest wyciszony.';
+  String get alarmStyleHint => '„Zawsze dzwoń” używa głośności alarmu, nawet w trybie cichym. „Szanuj tryb cichy” używa głośności powiadomień i tylko wibruje, gdy telefon jest wyciszony.';
 
   @override
   String get suggestedPicks => 'Polecane dla ciebie';
@@ -2722,8 +2739,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get onbPlaceTitle => 'Gdzie trenujesz?';
 
   @override
-  String get onbPlaceWhy =>
-      'Zaznacz wszystkie miejsca, w których trenujesz. Zaproponujemy tylko to, co możesz zrobić w każdym z nich.';
+  String get onbPlaceWhy => 'Zaznacz wszystkie miejsca, w których trenujesz. Zaproponujemy tylko to, co możesz zrobić w każdym z nich.';
 
   @override
   String get onbPlaceGear => 'Co tam masz?';
@@ -2774,8 +2790,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get typeCardio => 'Dystans i czas';
 
   @override
-  String get exerciseTypeHint =>
-      'Cardio, jak bieganie czy pływanie, zapisuje dystans i czas. Pozycje statyczne, jak deska, zapisują czas.';
+  String get exerciseTypeHint => 'Cardio, jak bieganie czy pływanie, zapisuje dystans i czas. Pozycje statyczne, jak deska, zapisują czas.';
 
   @override
   String get howToLabel => 'Jak wykonać (opcjonalnie)';
@@ -2808,23 +2823,19 @@ class AppLocalizationsPl extends AppLocalizations {
   String get setTypeDropInfo => 'Zaraz po serii zmniejsz ciężar i kontynuuj bez odpoczynku.';
 
   @override
-  String get setTypeFailureInfo =>
-      'Ćwicz, aż nie dasz rady zrobić kolejnego czystego powtórzenia. Zapisz te, które faktycznie zrobiłeś.';
+  String get setTypeFailureInfo => 'Ćwicz, aż nie dasz rady zrobić kolejnego czystego powtórzenia. Zapisz te, które faktycznie zrobiłeś.';
 
   @override
-  String get setTypeRestPauseInfo =>
-      'Odpocznij 10–20 sekund po serii, a potem wyciśnij jeszcze kilka powtórzeń.';
+  String get setTypeRestPauseInfo => 'Odpocznij 10–20 sekund po serii, a potem wyciśnij jeszcze kilka powtórzeń.';
 
   @override
-  String get planFormatNotes =>
-      'Używaj nazw ćwiczeń dokładnie tak, jak na liście. \"sets\", \"reps\", \"weight\" (w podanej jednostce), \"rest\" w sekundach i \"days\" są opcjonalne. \"superset\": true łączy ćwiczenie z następnym. Dla kilku tygodni zgrupuj rutyny w \"weeks\", jak w drugim przykładzie.';
+  String get planFormatNotes => 'Używaj nazw ćwiczeń dokładnie tak, jak na liście. \"sets\", \"reps\", \"weight\" (w podanej jednostce), \"rest\" w sekundach i \"days\" są opcjonalne. \"superset\": true łączy ćwiczenie z następnym. Dla kilku tygodni zgrupuj rutyny w \"weeks\", jak w drugim przykładzie.';
 
   @override
   String get planSets => 'Zaplanuj serie';
 
   @override
-  String get planSetsHint =>
-      'Wybierz typ, powtórzenia i ciężar każdej serii. Zostaw ciężar na Auto, by zacząć od ostatniego treningu.';
+  String get planSetsHint => 'Wybierz typ, powtórzenia i ciężar każdej serii. Zostaw ciężar na Auto, by zacząć od ostatniego treningu.';
 
   @override
   String get planHintReps => 'Wybierz typ i powtórzenia każdej serii. Auto zaczyna od ostatniej sesji.';
@@ -2833,8 +2844,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get planHintTime => 'Wybierz typ i czas każdej serii. Auto zaczyna od ostatniej sesji.';
 
   @override
-  String get planHintTimeWeight =>
-      'Wybierz typ, czas i ciężar każdej serii. Auto zaczyna od ostatniej sesji.';
+  String get planHintTimeWeight => 'Wybierz typ, czas i ciężar każdej serii. Auto zaczyna od ostatniej sesji.';
 
   @override
   String get planHintCardio => 'Wybierz dystans i czas każdej serii. Auto zaczyna od ostatniej sesji.';
@@ -2911,8 +2921,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get aiStepCopy => 'Skopiuj prośbę. Zawiera listę twoich ćwiczeń i format, który czyta GymMane.';
 
   @override
-  String get aiStepAsk =>
-      'Wklej ją do dowolnej AI i powiedz, czego chcesz: dni w tygodniu, cel, ile tygodni.';
+  String get aiStepAsk => 'Wklej ją do dowolnej AI i powiedz, czego chcesz: dni w tygodniu, cel, ile tygodni.';
 
   @override
   String get aiStepPaste => 'Wklej odpowiedź poniżej i zaimportuj. Plik niepotrzebny.';
@@ -2958,8 +2967,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get recoveryFresh => 'Wypoczęty';
 
   @override
-  String get recoveryHint =>
-      'Dotknij mięśnia, by zobaczyć, jak jest zregenerowany. Niedawne serie ważą więcej, a cięższe (wg RPE) jeszcze więcej.';
+  String get recoveryHint => 'Dotknij mięśnia, by zobaczyć, jak jest zregenerowany. Niedawne serie ważą więcej, a cięższe (wg RPE) jeszcze więcej.';
 
   @override
   String recoveryPct(int pct) {
@@ -3057,8 +3065,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get shareIntroTitle => 'Udostępnij tę rutynę';
 
   @override
-  String get shareIntroBody =>
-      'Wyślij ją partnerowi, znajomemu lub rodzinie. Dostaną mały plik, który otwiera się w GymMane i dodaje rutynę jednym dotknięciem, z seriami i ciężarami.';
+  String get shareIntroBody => 'Wyślij ją partnerowi, znajomemu lub rodzinie. Dostaną mały plik, który otwiera się w GymMane i dodaje rutynę jednym dotknięciem, z seriami i ciężarami.';
 
   @override
   String get removedFromRoutine => 'Usunięto z rutyny';
@@ -3093,8 +3100,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get effortSetting => 'Zapisuj wysiłek';
 
   @override
-  String get effortHint =>
-      'RPE: 10 to brak sił na kolejne powtórzenie, 8 to jeszcze dwa w zapasie. RIR liczy powtórzenia, które zostały. Jeśli seria go ma, szacowany 1RM korzysta z tabeli RPE.';
+  String get effortHint => 'RPE: 10 to brak sił na kolejne powtórzenie, 8 to jeszcze dwa w zapasie. RIR liczy powtórzenia, które zostały. Jeśli seria go ma, szacowany 1RM korzysta z tabeli RPE.';
 
   @override
   String get rirHint => '0 to brak sił na kolejne powtórzenie, 2 to jeszcze dwa w zapasie.';
@@ -3107,7 +3113,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String repCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n powt.', one: '$n powt.');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n powt.',
+      one: '$n powt.',
+    );
     return '$_temp0';
   }
 
@@ -3204,8 +3215,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get stepsGrant => 'Dotknij, aby zezwolić w Health Connect';
 
   @override
-  String get stepsInfoRead =>
-      'Odczytuje tylko liczbę kroków. Nie czyta nic innego i nigdy nie zapisuje w Health Connect.';
+  String get stepsInfoRead => 'Odczytuje tylko liczbę kroków. Nie czyta nic innego i nigdy nie zapisuje w Health Connect.';
 
   @override
   String get stepsInfoLocal => 'Twoje kroki zostają w telefonie. GymMane nigdy nie łączy się z internetem.';
@@ -3252,8 +3262,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get archivedToastHint => 'Znajdziesz je w Ćwiczenia › Zarchiwizowane';
 
   @override
-  String get archivedBanner =>
-      'Zarchiwizowane. Nie pojawia się na listach ani w propozycjach; historia zostaje.';
+  String get archivedBanner => 'Zarchiwizowane. Nie pojawia się na listach ani w propozycjach; historia zostaje.';
 
   @override
   String get videoMarksHint => 'Zatrzymaj na kroku i dotknij pinezki, aby następnym razem tam przeskoczyć.';
@@ -3307,8 +3316,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get planNoHistory =>
-      'Nie mam jeszcze zapisanych treningów: traktuj mnie jak początkującego i ostrożnie dobieraj objętość i ciężary.';
+  String get planNoHistory => 'Nie mam jeszcze zapisanych treningów: traktuj mnie jak początkującego i ostrożnie dobieraj objętość i ciężary.';
 
   @override
   String planHistory(int n) {
@@ -3325,8 +3333,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get planBestLifts => 'Najlepsze ostatnie serie';
 
   @override
-  String get planAskFirst =>
-      'Jeśli nie znasz mojego celu (siła, mięśnie, redukcja lub ogólna forma) albo długości sesji, najpierw zapytaj mnie krótko. Potem odpowiedz wyłącznie w JSON.';
+  String get planAskFirst => 'Jeśli nie znasz mojego celu (siła, mięśnie, redukcja lub ogólna forma) albo długości sesji, najpierw zapytaj mnie krótko. Potem odpowiedz wyłącznie w JSON.';
 
   @override
   String get backToTop => 'Na górę';
@@ -3340,8 +3347,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get exportForStravaHint =>
-      'Prześlij w przeglądarce na strava.com/upload/select (aplikacja Strava nie importuje plików). Pojawi się jako trening siłowy z twoimi seriami.';
+  String get exportForStravaHint => 'Prześlij w przeglądarce na strava.com/upload/select (aplikacja Strava nie importuje plików). Pojawi się jako trening siłowy z twoimi seriami.';
 
   @override
   String get manualStartTime => 'Godzina rozpoczęcia';
@@ -3359,8 +3365,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get stravaBeta => 'BETA';
 
   @override
-  String get stravaIntro =>
-      'Wybierz trening do Stravy. Dostaniesz plik .fit: prześlij go w przeglądarce na strava.com/upload/select, a pojawi się jako trening siłowy z seriami.';
+  String get stravaIntro => 'Wybierz trening do Stravy. Dostaniesz plik .fit: prześlij go w przeglądarce na strava.com/upload/select, a pojawi się jako trening siłowy z seriami.';
 
   @override
   String get stravaEmpty => 'Brak treningów do eksportu.';
@@ -3403,8 +3408,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get tplRr =>
-      'Klasyk z r/bodyweightfitness: całe ciało trzy dni w tygodniu. Przejdź o krok wyżej, gdy zrobi się łatwo.';
+  String get tplRr => 'Klasyk z r/bodyweightfitness: całe ciało trzy dni w tygodniu. Przejdź o krok wyżej, gdy zrobi się łatwo.';
 
   @override
   String get levelUpKicker => 'NASTĘPNY KROK';
@@ -3636,8 +3640,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get nfcPoint1 => 'Dzisiejszy trening gotowy';
 
   @override
-  String get nfcPoint1Body =>
-      'Przyłóż telefon, a otworzy się dzisiejszy plan z ćwiczeniami. Zaczynasz, kiedy chcesz.';
+  String get nfcPoint1Body => 'Przyłóż telefon, a otworzy się dzisiejszy plan z ćwiczeniami. Zaczynasz, kiedy chcesz.';
 
   @override
   String get nfcPoint2 => 'W dni odpoczynku powie ci o tym';
@@ -3649,8 +3652,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get nfcPoint3 => 'Zapisujesz raz';
 
   @override
-  String get nfcPoint3Body =>
-      'Zmieniaj plan, kiedy chcesz: naklejka zawsze otwiera to, co jest zaplanowane na dany dzień.';
+  String get nfcPoint3Body => 'Zmieniaj plan, kiedy chcesz: naklejka zawsze otwiera to, co jest zaplanowane na dany dzień.';
 
   @override
   String get nfcUse => 'Używaj naklejki';
@@ -3680,8 +3682,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get nfcWaitBody => 'Przyłóż ją do tyłu telefonu, blisko aparatu, aż zawibruje.';
 
   @override
-  String get nfcTip =>
-      'Pasuje każda naklejka NTAG213, 215 lub 216. Są najpopularniejsze i kosztują bardzo mało.';
+  String get nfcTip => 'Pasuje każda naklejka NTAG213, 215 lub 216. Są najpopularniejsze i kosztują bardzo mało.';
 
   @override
   String get nfcDoneTitle => 'Naklejka gotowa';
@@ -3708,8 +3709,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get nfcErrSmall => 'To się nie mieści na tej naklejce. Użyj NTAG213 lub większej.';
 
   @override
-  String get nfcErrLost =>
-      'Naklejka poruszyła się przed końcem. Przytrzymaj ją nieruchomo i spróbuj ponownie.';
+  String get nfcErrLost => 'Naklejka poruszyła się przed końcem. Przytrzymaj ją nieruchomo i spróbuj ponownie.';
 
   @override
   String get nfcErrUnsupported => 'Ta naklejka nie jest obsługiwana. Użyj NTAG213, 215 lub 216.';
@@ -3741,8 +3741,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get raceThen => 'Wtedy';
 
   @override
-  String get raceHint =>
-      'Porównywane są tylko te same serie: jeśli zrobiłeś 2, z twoimi pierwszymi 2 z tamtego dnia.';
+  String get raceHint => 'Porównywane są tylko te same serie: jeśli zrobiłeś 2, z twoimi pierwszymi 2 z tamtego dnia.';
 
   @override
   String get placeActiveNow => 'Jesteś tutaj';
@@ -3813,8 +3812,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get dotsExplain =>
-      'Porównuje twoją siłę z każdym, niezależnie od wagi. Użyj najlepszego pojedynczego powtórzenia albo szacowanego 1RM.';
+  String get dotsExplain => 'Porównuje twoją siłę z każdym, niezależnie od wagi. Użyj najlepszego pojedynczego powtórzenia albo szacowanego 1RM.';
 
   @override
   String get dotsLevel0 => 'Początkujący';
@@ -3841,8 +3839,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get toolDescWilks => 'Klasyczna punktacja trójboju';
 
   @override
-  String get wilksExplain =>
-      'Klasyczny wzór trójboju siłowego. W 2020 zastąpił go DOTS, ale wiele zawodów i rankingów nadal go używa.';
+  String get wilksExplain => 'Klasyczny wzór trójboju siłowego. W 2020 zastąpił go DOTS, ale wiele zawodów i rankingów nadal go używa.';
 
   @override
   String get toolNameFfmi => 'FFMI';
@@ -3862,8 +3859,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get ffmiExplain =>
-      'Jak BMI, ale bez tłuszczu: liczy tylko beztłuszczową masę ciała. Skorygowany o wzrost, żeby uczciwie porównać wysokich i niskich.';
+  String get ffmiExplain => 'Jak BMI, ale bez tłuszczu: liczy tylko beztłuszczową masę ciała. Skorygowany o wzrost, żeby uczciwie porównać wysokich i niskich.';
 
   @override
   String get ffmiLevel0 => 'Poniżej średniej';
@@ -4558,8 +4554,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get prepHint => 'Zapisz cały garnek raz i jedz go po kawałku.';
 
   @override
-  String get prepEmpty =>
-      'Gotowałeś na kilka dni? Zapisz raz, a potem podawaj tylko, ile zjadłeś z tego, co zostało.';
+  String get prepEmpty => 'Gotowałeś na kilka dni? Zapisz raz, a potem podawaj tylko, ile zjadłeś z tego, co zostało.';
 
   @override
   String get prepNameHint => 'np. Kurczak z ryżem';
@@ -4613,8 +4608,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get editValues => 'Edytuj wartości';
 
   @override
-  String get editValuesHint =>
-      'Zmienia tylko ten wpis. Aby poprawić produkt na przyszłość, edytuj go w Moich produktach.';
+  String get editValuesHint => 'Zmienia tylko ten wpis. Aby poprawić produkt na przyszłość, edytuj go w Moich produktach.';
 
   @override
   String get editLibraryHint => 'Zapisze się jako twój produkt, z tym samym zdjęciem';
@@ -4695,8 +4689,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get searchFoodsPrompt => 'Co zjadłeś?';
 
   @override
-  String get shelfEmpty =>
-      'Wyszukaj produkt albo zrób zdjęcie swojego: tu pojawią się te, które zapisujesz najczęściej.';
+  String get shelfEmpty => 'Wyszukaj produkt albo zrób zdjęcie swojego: tu pojawią się te, które zapisujesz najczęściej.';
 
   @override
   String get repeatEntry => 'Powtórz';
@@ -4778,8 +4771,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get planFromDay => 'Kopiuj ten dzień';
 
   @override
-  String get planNewHint =>
-      'Planuj dni jak swoje plany treningowe, a potem zapisz cały posiłek jednym dotknięciem.';
+  String get planNewHint => 'Planuj dni jak swoje plany treningowe, a potem zapisz cały posiłek jednym dotknięciem.';
 
   @override
   String get planLogDay => 'Zapisz puste posiłki';
@@ -4833,29 +4825,25 @@ class AppLocalizationsPl extends AppLocalizations {
   String get nutritionAboutWhatTitle => 'Część twojego treningu';
 
   @override
-  String get nutritionAboutWhat =>
-      'Prosty sposób na zapisywanie posiłków, wody, białka i suplementów tuż obok treningów. GymMane to przede wszystkim aplikacja na siłownię: odżywianie jest po to, żebyś miał wszystko w jednym miejscu, a nie żeby zastąpić aplikację dietetyczną.';
+  String get nutritionAboutWhat => 'Prosty sposób na zapisywanie posiłków, wody, białka i suplementów tuż obok treningów. GymMane to przede wszystkim aplikacja na siłownię: odżywianie jest po to, żebyś miał wszystko w jednym miejscu, a nie żeby zastąpić aplikację dietetyczną.';
 
   @override
   String get nutritionAboutScanTitle => 'Bez skanera, nigdy';
 
   @override
-  String get nutritionAboutScan =>
-      'Zeskanowanie kodu kreskowego i automatyczne uzupełnienie wszystkiego byłoby wygodne. Ale wymaga to internetu i ogromnej internetowej bazy produktów, a to, co jesz, trafia na cudze serwery. Te dane pokazują, kiedy jesz, co jesz i jak dbasz o swoje ciało, i mogą zostać użyte do reklam albo trafić do dużych firm. Dlatego nie ma skanera i nie będzie.';
+  String get nutritionAboutScan => 'Zeskanowanie kodu kreskowego i automatyczne uzupełnienie wszystkiego byłoby wygodne. Ale wymaga to internetu i ogromnej internetowej bazy produktów, a to, co jesz, trafia na cudze serwery. Te dane pokazują, kiedy jesz, co jesz i jak dbasz o swoje ciało, i mogą zostać użyte do reklam albo trafić do dużych firm. Dlatego nie ma skanera i nie będzie.';
 
   @override
   String get nutritionAboutLocalTitle => 'Wszystko w twoim telefonie';
 
   @override
-  String get nutritionAboutLocal =>
-      'Aplikacja zawiera ponad 500 produktów ze zdjęciami. Możesz dodawać własne, zmieniać ich zdjęcia i edytować wartości. Wszystko zostaje w twoim telefonie, jak cała reszta GymMane.';
+  String get nutritionAboutLocal => 'Aplikacja zawiera ponad 500 produktów ze zdjęciami. Możesz dodawać własne, zmieniać ich zdjęcia i edytować wartości. Wszystko zostaje w twoim telefonie, jak cała reszta GymMane.';
 
   @override
   String get nutritionAboutBetaTitle => 'Wciąż w becie';
 
   @override
-  String get nutritionAboutBeta =>
-      'Jeśli czegoś ci brakuje, zaproponuj to na GitHubie. Tylko nie skaner ani większa baza produktów: poza twoją prywatnością aplikacja byłaby dużo cięższa. Nie potrzebujesz odżywiania? Wyłącz je w Ustawieniach, a twoje dane zostaną.';
+  String get nutritionAboutBeta => 'Jeśli czegoś ci brakuje, zaproponuj to na GitHubie. Tylko nie skaner ani większa baza produktów: poza twoją prywatnością aplikacja byłaby dużo cięższa. Nie potrzebujesz odżywiania? Wyłącz je w Ustawieniach, a twoje dane zostaną.';
 
   @override
   String get nutritionAboutSuggest => 'Zaproponuj pomysł';
@@ -4895,8 +4883,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get cutoutEdit => 'Popraw wycięcie';
 
   @override
-  String get cutoutEditHint =>
-      'Przeciągnij, aby wymazać lub przywrócić. Dotknij obszaru, aby usunąć go lub przywrócić w całości. Rozsuń palce, aby powiększyć.';
+  String get cutoutEditHint => 'Przeciągnij, aby wymazać lub przywrócić. Dotknij obszaru, aby usunąć go lub przywrócić w całości. Rozsuń palce, aby powiększyć.';
 
   @override
   String get cutoutErase => 'Wymaż';
@@ -5170,8 +5157,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get vesselMotion => 'Ruchoma woda i shaker';
 
   @override
-  String get vesselMotionHint =>
-      'Wyłącz, jeśli ekran działa wolno: szklanki dalej się napełniają, tylko przestają się ruszać.';
+  String get vesselMotionHint => 'Wyłącz, jeśli ekran działa wolno: szklanki dalej się napełniają, tylko przestają się ruszać.';
 
   @override
   String get planFixedWeek => 'Stały tydzień';
@@ -5278,8 +5264,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get layoutList => 'Lista';
 
   @override
-  String get layoutHint =>
-      'Karty pokazują jedno ćwiczenie naraz. Lista pokazuje cały trening na jednym ekranie, seria po serii.';
+  String get layoutHint => 'Karty pokazują jedno ćwiczenie naraz. Lista pokazuje cały trening na jednym ekranie, seria po serii.';
 
   @override
   String get layoutRowHint => 'Jedno ćwiczenie naraz lub wszystko jako lista';
@@ -5315,8 +5300,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get heatRangeYear => '12 miesięcy';
 
   @override
-  String get heatRangeHint =>
-      '12 miesięcy pokazuje cały rok. Przesuń w bok, aby cofnąć się aż do pierwszego treningu.';
+  String get heatRangeHint => '12 miesięcy pokazuje cały rok. Przesuń w bok, aby cofnąć się aż do pierwszego treningu.';
 
   @override
   String get pdfPlan => 'Plan jako PDF';
@@ -5372,8 +5356,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get workoutNoteNext => 'Następnym razem';
 
   @override
-  String get workoutNoteEveryHint =>
-      'Widać ją przy każdym podejściu do ćwiczenia. Dobra na ustawienia siedziska lub wyciągu.';
+  String get workoutNoteEveryHint => 'Widać ją przy każdym podejściu do ćwiczenia. Dobra na ustawienia siedziska lub wyciągu.';
 
   @override
   String get workoutNoteNextHint => 'Pojawi się tylko następnym razem, potem zniknie.';
@@ -5393,8 +5376,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get assistedSetting => 'Maszyna z asystą';
 
   @override
-  String get assistedSettingHint =>
-      'Ciężar ci pomaga, więc mniej znaczy lepiej: rekordy i sugestie idą w dół.';
+  String get assistedSettingHint => 'Ciężar ci pomaga, więc mniej znaczy lepiej: rekordy i sugestie idą w dół.';
 
   @override
   String get assistedRecordHint => 'Najmniej pomocy';
@@ -5484,8 +5466,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get kcalNeedsData => 'Dodaj dystans i czas, aby oszacować kalorie';
 
   @override
-  String get kcalHowEstimated =>
-      'Oszacowane na podstawie dystansu, czasu, nachylenia i twojej wagi (wzór ACSM).';
+  String get kcalHowEstimated => 'Oszacowane na podstawie dystansu, czasu, nachylenia i twojej wagi (wzór ACSM).';
 
   @override
   String get kcalOwnTitle => 'Aktywne kalorie';
@@ -5545,15 +5526,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get progVolume => 'Powtórzenia, serie i ciężar';
 
   @override
-  String get progVolumeHint =>
-      'Powtórzenia do górnej granicy, potem jedna seria więcej, potem większy ciężar.';
+  String get progVolumeHint => 'Powtórzenia do górnej granicy, potem jedna seria więcej, potem większy ciężar.';
 
   @override
   String get progAmrap => 'Ostatnia seria na maksa';
 
   @override
-  String get progAmrapHint =>
-      'Ostatnia seria: tyle powtórzeń, ile dasz radę. Podwój cel, a skok będzie podwójny.';
+  String get progAmrapHint => 'Ostatnia seria: tyle powtórzeń, ile dasz radę. Podwój cel, a skok będzie podwójny.';
 
   @override
   String get progStep => 'Skok ciężaru';
@@ -5569,7 +5548,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String progFails(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n porażkach', one: '1 porażce');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n porażkach',
+      one: '1 porażce',
+    );
     return '$_temp0';
   }
 
@@ -5644,8 +5628,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get setTypeCluster => 'Cluster';
 
   @override
-  String get setTypeClusterInfo =>
-      'Seria podzielona na małe bloki z 15–30 sekundami przerwy. Zapisz łączną liczbę powtórzeń.';
+  String get setTypeClusterInfo => 'Seria podzielona na małe bloki z 15–30 sekundami przerwy. Zapisz łączną liczbę powtórzeń.';
 
   @override
   String timesBodyweight(String value) {
@@ -5665,8 +5648,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get autoBackup => 'Automatyczna kopia';
 
   @override
-  String get autoBackupHint =>
-      'Zapisuje ZIP ze wszystkimi danymi w wybranym folderze. Zsynchronizuj ten folder z Nextcloud, Syncthing lub inną aplikacją, aby mieć kopię poza telefonem.';
+  String get autoBackupHint => 'Zapisuje ZIP ze wszystkimi danymi w wybranym folderze. Zsynchronizuj ten folder z Nextcloud, Syncthing lub inną aplikacją, aby mieć kopię poza telefonem.';
 
   @override
   String get autoBackupFolder => 'Wybierz folder';
@@ -5745,8 +5727,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get healthPickTitle => 'Dane zdrowotne';
 
   @override
-  String get healthPickHint =>
-      'Wybierz, co pobrać z Health Connect. Android pyta raz o każdą pozycję. Dane są tylko odczytywane i nigdy nie opuszczają telefonu.';
+  String get healthPickHint => 'Wybierz, co pobrać z Health Connect. Android pyta raz o każdą pozycję. Dane są tylko odczytywane i nigdy nie opuszczają telefonu.';
 
   @override
   String get healthGroupHeart => 'Serce';
@@ -5848,12 +5829,10 @@ class AppLocalizationsPl extends AppLocalizations {
   String get ladderTitle => 'Progresja';
 
   @override
-  String get ladderHint =>
-      'Ułóż kroki od najłatwiejszego do najtrudniejszego. Gdy zrobisz 3 serie po 8 dwa treningi z rzędu (5 w wolnych), GymMane zaproponuje następny.';
+  String get ladderHint => 'Ułóż kroki od najłatwiejszego do najtrudniejszego. Gdy zrobisz 3 serie po 8 dwa treningi z rzędu (5 w wolnych), GymMane zaproponuje następny.';
 
   @override
-  String get ladderBuiltIn =>
-      'Bazuje na progresji aplikacji. Dodaj, usuń lub przestaw kroki, a stanie się progresją tej rutyny.';
+  String get ladderBuiltIn => 'Bazuje na progresji aplikacji. Dodaj, usuń lub przestaw kroki, a stanie się progresją tej rutyny.';
 
   @override
   String get ladderNone => 'Jeszcze brak. Dotknij, aby utworzyć.';
@@ -5924,8 +5903,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get lowEndTitle => 'Twój telefon ma mało pamięci';
 
   @override
-  String get lowEndBody =>
-      'Bez rozmycia wszystko działa płynniej. Możesz je przywrócić w Ustawienia → Ogólne.';
+  String get lowEndBody => 'Bez rozmycia wszystko działa płynniej. Możesz je przywrócić w Ustawienia → Ogólne.';
 
   @override
   String get lowEndOff => 'Wyłącz rozmycie';
@@ -5949,8 +5927,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get gymPassPicture => 'Zapisz zdjęcie kodu';
 
   @override
-  String get gymPassPictureHint =>
-      'Dla kodów, których aplikacja nie odczyta: pokazuje zdjęcie przy pełnej jasności';
+  String get gymPassPictureHint => 'Dla kodów, których aplikacja nie odczyta: pokazuje zdjęcie przy pełnej jasności';
 
   @override
   String get gymPassPictureFormat => 'Zdjęcie';
@@ -6051,8 +6028,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get sessionMuscles => 'Mięśnie w tym treningu';
 
   @override
-  String get sessionMusclesHint =>
-      'Blade jeszcze przed tobą, jaskrawe zrobione. Serie na mięsień, pomocnicze liczą się w połowie.';
+  String get sessionMusclesHint => 'Blade jeszcze przed tobą, jaskrawe zrobione. Serie na mięsień, pomocnicze liczą się w połowie.';
 
   @override
   String get miniBodySetting => 'Mała mapa mięśni przy planach';
@@ -6075,8 +6051,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get balanceHint =>
-      'Porównuje twoje szacowane 1RM z ostatnich 4 miesięcy z klasycznymi proporcjami: przysiad 100%, martwy ciąg 120%, wyciskanie leżąc 75%, wiosłowanie 52%, wyciskanie nad głowę 45%. Ćwiczenie dużo poniżej reszty to zwykle słaby punkt.';
+  String get balanceHint => 'Porównuje twoje szacowane 1RM z ostatnich 4 miesięcy z klasycznymi proporcjami: przysiad 100%, martwy ciąg 120%, wyciskanie leżąc 75%, wiosłowanie 52%, wyciskanie nad głowę 45%. Ćwiczenie dużo poniżej reszty to zwykle słaby punkt.';
 
   @override
   String get balanceEven => 'W równowadze';
@@ -6159,8 +6134,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get weightStack => 'Stos ciężarów';
 
   @override
-  String get weightStackHint =>
-      'Ciężary, które ta maszyna ma naprawdę. + i −, progresja i rozładowania trafiają tylko w nie.';
+  String get weightStackHint => 'Ciężary, które ta maszyna ma naprawdę. + i −, progresja i rozładowania trafiają tylko w nie.';
 
   @override
   String get weightStackOff => 'Wyłączony: zwykłe skoki';
@@ -6207,8 +6181,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get healthLinkWeight => 'Ważenia z innych aplikacji';
 
   @override
-  String get healthLinkWeightHint =>
-      'Ważenia z twojej wagi z ostatnich 30 dni. Nigdy nie nadpisuje tego, co wpisałeś.';
+  String get healthLinkWeightHint => 'Ważenia z twojej wagi z ostatnich 30 dni. Nigdy nie nadpisuje tego, co wpisałeś.';
 
   @override
   String get healthLinkDenied => 'Health Connect nie dało uprawnień';
@@ -6317,8 +6290,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get healthLinkWrite => 'Zapisuj treningi';
 
   @override
-  String get healthLinkWriteHint =>
-      'Każdy ukończony trening trafia do Health Connect z godziną i rodzajem, żeby inne aplikacje też go liczyły. Wysyła też ostatnie 30 dni.';
+  String get healthLinkWriteHint => 'Każdy ukończony trening trafia do Health Connect z godziną i rodzajem, żeby inne aplikacje też go liczyły. Wysyła też ostatnie 30 dni.';
 
   @override
   String get healthWorkoutTitle => 'Trening';
@@ -6357,8 +6329,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get circuitAdd => 'Dodaj ćwiczenie';
 
   @override
-  String get circuitEmpty =>
-      'Dodaj ćwiczenia w kolejności wykonywania. Jedno może być dwa razy, np. deska boczna na każdą stronę.';
+  String get circuitEmpty => 'Dodaj ćwiczenia w kolejności wykonywania. Jedno może być dwa razy, np. deska boczna na każdą stronę.';
 
   @override
   String circuitSummary(int steps, int rounds, String time) {
@@ -6529,8 +6500,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get readinessWaiting => 'Oceniaj dalej treningi';
 
   @override
-  String get readinessWaitingHint =>
-      'Po kilku dobrych i złych dniach zobaczysz, jak zmieniają twoje ciężary.';
+  String get readinessWaitingHint => 'Po kilku dobrych i złych dniach zobaczysz, jak zmieniają twoje ciężary.';
 
   @override
   String readinessSleepLess(int n) {
@@ -6587,8 +6557,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get clearWorkoutsBody =>
-      'Znikną historia, rekordy i medale. Zostaną plany, ćwiczenia, zdjęcia, pomiary, odżywianie i ustawienia. Najpierw wyeksportuj kopię, jeśli możesz chcieć je odzyskać.';
+  String get clearWorkoutsBody => 'Znikną historia, rekordy i medale. Zostaną plany, ćwiczenia, zdjęcia, pomiary, odżywianie i ustawienia. Najpierw wyeksportuj kopię, jeśli możesz chcieć je odzyskać.';
 
   @override
   String get clearWorkoutsConfirm => 'Usuń treningi';
@@ -6655,8 +6624,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get reportChangeCol => 'ZMIANA';
 
   @override
-  String get reportBestHint =>
-      'Najlepsze 1RM jest szacowane z twoich serii. Zmiana porównuje pierwszy i ostatni dzień ćwiczenia w tym raporcie.';
+  String get reportBestHint => 'Najlepsze 1RM jest szacowane z twoich serii. Zmiana porównuje pierwszy i ostatni dzień ćwiczenia w tym raporcie.';
 
   @override
   String get reportMuscles => 'Serie na mięsień';
@@ -6862,8 +6830,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get supportThanksTitle => 'Dzięki, że tu jesteś 🤍';
 
   @override
-  String get supportThanksBody =>
-      'GymMane jest darmowy i zawsze będzie, bez reklam i bez haczyków.\n\nJeśli pomaga ci trenować, postawienie mi kawy poprawi mi dzień ☕\nA jeśli nie możesz, nic nie szkodzi: gwiazdka na GitHubie też ⭐';
+  String get supportThanksBody => 'GymMane jest darmowy i zawsze będzie, bez reklam i bez haczyków.\n\nJeśli pomaga ci trenować, postawienie mi kawy poprawi mi dzień ☕\nA jeśli nie możesz, nic nie szkodzi: gwiazdka na GitHubie też ⭐';
 
   @override
   String get perfSetting => 'Wydajność';
@@ -6915,8 +6882,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get perfHzHint => 'Wszystko przewija się płynniej, kosztem odrobiny baterii';
 
   @override
-  String get lowEndLiteBody =>
-      'Tryb oszczędny (bez rozmycia, spokojniejszy ruch) będzie na nim płynniejszy. Zmienisz to w Ustawienia → Ogólne → Wydajność.';
+  String get lowEndLiteBody => 'Tryb oszczędny (bez rozmycia, spokojniejszy ruch) będzie na nim płynniejszy. Zmienisz to w Ustawienia → Ogólne → Wydajność.';
 
   @override
   String get lowEndLiteOn => 'Włącz tryb oszczędny';
@@ -6954,8 +6920,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get placeDumbbells => 'Hantle';
 
   @override
-  String get dumbbellsHint =>
-      'Waga jednego hantla. Progresja i przyciski + i − trafią tutaj tylko w te wartości.';
+  String get dumbbellsHint => 'Waga jednego hantla. Progresja i przyciski + i − trafią tutaj tylko w te wartości.';
 
   @override
   String get dumbbellOther => 'Inna waga';
@@ -7359,7 +7324,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String recapFoodTimes(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n dni', one: '1 dzień');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n dni',
+      one: '1 dzień',
+    );
     return '$_temp0';
   }
 
@@ -7370,8 +7340,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get onbSpeedTitle => 'Niech działa płynnie';
 
   @override
-  String get onbSpeedWhy =>
-      'Twój telefon chyba się męczy. Wyłącz to, a wszystko będzie płynniejsze: spróbuj i zobacz podgląd.';
+  String get onbSpeedWhy => 'Twój telefon chyba się męczy. Wyłącz to, a wszystko będzie płynniejsze: spróbuj i zobacz podgląd.';
 
   @override
   String get onbSpeedMotion => 'Animacje';
@@ -7392,8 +7361,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get notifSoundRowHint => 'Jak brzmi każdy rodzaj przypomnienia';
 
   @override
-  String get notifSoundHint =>
-      'Wybierz dźwięk dla każdego rodzaju przypomnienia. Z telefonu otwiera dźwięki telefonu, a na większości telefonów możesz tam dodać własną piosenkę.';
+  String get notifSoundHint => 'Wybierz dźwięk dla każdego rodzaju przypomnienia. Z telefonu otwiera dźwięki telefonu, a na większości telefonów możesz tam dodać własną piosenkę.';
 
   @override
   String get notifSoundTrain => 'Treningi';
@@ -7441,8 +7409,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get autoProgressReps => 'Dodawaj powtórzenia';
 
   @override
-  String get autoProgressHint =>
-      'Gdy zaczynasz trening, GymMane wpisuje następny krok dla każdego ćwiczenia. Z Dodawaj powtórzenia dodajesz jedno powtórzenie na serię aż do 12, potem rośnie ciężar i wracasz do 8. Każde ćwiczenie nadal możesz dostroić na jego stronie.';
+  String get autoProgressHint => 'Gdy zaczynasz trening, GymMane wpisuje następny krok dla każdego ćwiczenia. Z Dodawaj powtórzenia dodajesz jedno powtórzenie na serię aż do 12, potem rośnie ciężar i wracasz do 8. Każde ćwiczenie nadal możesz dostroić na jego stronie.';
 
   @override
   String get noteFolders => 'Foldery';
@@ -7521,8 +7488,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get deloadHint =>
-      'Co kilka tygodni lżejszy tydzień na regenerację: połowa serii i 10 % mniej ciężaru. Ten tydzień nie liczy się do progresji.';
+  String get deloadHint => 'Co kilka tygodni lżejszy tydzień na regenerację: połowa serii i 10 % mniej ciężaru. Ten tydzień nie liczy się do progresji.';
 
   @override
   String get deloadRowHint => 'Lekki tydzień co kilka tygodni';
@@ -7713,8 +7679,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get lightSession => 'Lekki trening';
 
   @override
-  String get lightSessionHint =>
-      'Zapisany w historii i statystykach, ale nie zmienia twoich kolejnych celów.';
+  String get lightSessionHint => 'Zapisany w historii i statystykach, ale nie zmienia twoich kolejnych celów.';
 
   @override
   String get lightSessionNote => 'Nie liczy się do progresji';
@@ -7723,8 +7688,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get lightSessionOff => 'Wyłącz';
 
   @override
-  String get eachSideRepsHint =>
-      'Zapisuj powtórzenia lewej i prawej strony osobno. Progresja idzie za słabszą stroną.';
+  String get eachSideRepsHint => 'Zapisuj powtórzenia lewej i prawej strony osobno. Progresja idzie za słabszą stroną.';
 
   @override
   String get repsLeftCol => 'POWT. L';
@@ -7839,8 +7803,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get mealAiUnreadable => 'Nie znalazłem w tym tekście żadnego produktu';
 
   @override
-  String get mealAiUnreadableHint =>
-      'Poproś AI, by wysłała tylko JSON, w jednym bloku kodu, w formacie z prośby.';
+  String get mealAiUnreadableHint => 'Poproś AI, by wysłała tylko JSON, w jednym bloku kodu, w formacie z prośby.';
 
   @override
   String get mealAiCopyFix => 'Kopiuj to zdanie';
@@ -7991,15 +7954,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get gfxCompat => 'Zgodna grafika';
 
   @override
-  String get gfxCompatHint =>
-      'Dla telefonów, na których litery wyglądają na zepsute. Rozmycie zostaje, kilka efektów się upraszcza';
+  String get gfxCompatHint => 'Dla telefonów, na których litery wyglądają na zepsute. Rozmycie zostaje, kilka efektów się upraszcza';
 
   @override
   String get gfxRestartTitle => 'Uruchomić GymMane ponownie?';
 
   @override
-  String get gfxRestartBody =>
-      'Zamknie się i otworzy, aby zmienić sposób rysowania ekranu. Nic z tego, co zapisałeś, nie przepadnie.';
+  String get gfxRestartBody => 'Zamknie się i otworzy, aby zmienić sposób rysowania ekranu. Nic z tego, co zapisałeś, nie przepadnie.';
 
   @override
   String get gfxRestart => 'Uruchom ponownie';
@@ -8011,8 +7972,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get webSyncedPhone => 'Zmiany z telefonu już są';
 
   @override
-  String get webWelcomeBlurb =>
-      'Wszystko zostaje na twoim własnym serwerze. Bez konta, bez chmury, nic do zapłacenia.';
+  String get webWelcomeBlurb => 'Wszystko zostaje na twoim własnym serwerze. Bez konta, bez chmury, nic do zapłacenia.';
 
   @override
   String get webOwnServer => 'Twój serwer, twoje zasady';
@@ -8056,8 +8016,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get webPhoneNothing => 'Nic nowego z telefonu';
 
   @override
-  String get webPhoneHow =>
-      'Włącz w telefonie automatyczną kopię do folderu synchronizowanego przez Syncthing. Serwer i telefon same pobierają nawzajem swoje zmiany, a scalanie nigdy niczego nie usuwa.';
+  String get webPhoneHow => 'Włącz w telefonie automatyczną kopię do folderu synchronizowanego przez Syncthing. Serwer i telefon same pobierają nawzajem swoje zmiany, a scalanie nigdy niczego nie usuwa.';
 
   @override
   String get webPhoneGuide => 'Jak to skonfigurować';
@@ -8123,8 +8082,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get proteinGoalLabel => 'Cel';
 
   @override
-  String get proteinExplain =>
-      'Opiera się na zakresie, co do którego zgadza się większość badań dla osób trenujących: więcej, gdy chudniesz, by zachować mięśnie. Przekroczenie go jest bezpieczne, po prostu niewiele daje.';
+  String get proteinExplain => 'Opiera się na zakresie, co do którego zgadza się większość badań dla osób trenujących: więcej, gdy chudniesz, by zachować mięśnie. Przekroczenie go jest bezpieczne, po prostu niewiele daje.';
 
   @override
   String get toolNameWater => 'Woda';
@@ -8142,8 +8100,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get waterTrainingLabel => 'Trening dziennie';
 
   @override
-  String get waterExplain =>
-      'Około 35 ml na kilogram masy ciała, plus trochę za każdą minutę treningu. W upalne dni pij więcej.';
+  String get waterExplain => 'Około 35 ml na kilogram masy ciała, plus trochę za każdą minutę treningu. W upalne dni pij więcej.';
 
   @override
   String get autoBackupSync => 'Synchronizuj teraz';
@@ -8152,19 +8109,16 @@ class AppLocalizationsPl extends AppLocalizations {
   String get autoBackupMerged => 'Zmiany z innych urządzeń już są';
 
   @override
-  String get autoBackupSyncHint =>
-      'Udostępnij ten folder przez Syncthing, a każde urządzenie pobierze to, co zostawią tu inne. Scalanie nigdy niczego nie usuwa.';
+  String get autoBackupSyncHint => 'Udostępnij ten folder przez Syncthing, a każde urządzenie pobierze to, co zostawią tu inne. Scalanie nigdy niczego nie usuwa.';
 
   @override
   String get webPhoneFolder => 'Wspólny folder';
 
   @override
-  String get webPhoneFolderHow =>
-      'Wybierany przy instalacji serwera. Aby go zmienić, ustaw GYMMANE_SYNC w pliku .env serwera i uruchom go ponownie.';
+  String get webPhoneFolderHow => 'Wybierany przy instalacji serwera. Aby go zmienić, ustaw GYMMANE_SYNC w pliku .env serwera i uruchom go ponownie.';
 
   @override
-  String get webPhoneOffHow =>
-      'Aby ją włączyć, usuń GYMMANE_SYNC=off z pliku .env serwera i uruchom go ponownie.';
+  String get webPhoneOffHow => 'Aby ją włączyć, usuń GYMMANE_SYNC=off z pliku .env serwera i uruchom go ponownie.';
 
   @override
   String webPhoneDevices(int n) {
@@ -8203,8 +8157,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get foodAiTitle => 'Food with AI';
 
   @override
-  String get foodAiHow =>
-      'Copy the request and paste it into any chatbot together with a photo of the nutrition label, a screenshot of the product or a link to it. Then paste its answer here.';
+  String get foodAiHow => 'Copy the request and paste it into any chatbot together with a photo of the nutrition label, a screenshot of the product or a link to it. Then paste its answer here.';
 
   @override
   String get foodAiCheck => 'The form fills itself in. Check the values against the label before saving.';
@@ -8339,8 +8292,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get helpDayOffQ => 'Jak oznaczyć dzień odpoczynku, choroby lub podróży?';
 
   @override
-  String get helpDayOffA =>
-      'Na ekranie głównym przytrzymaj dzień w swoim tygodniu. Seria i przypomnienie go pominą.';
+  String get helpDayOffA => 'Na ekranie głównym przytrzymaj dzień w swoim tygodniu. Seria i przypomnienie go pominą.';
 
   @override
   String get helpImportQ => 'Czy mogę przenieść treningi z Hevy, Strong lub innej aplikacji?';
@@ -8479,15 +8431,13 @@ class AppLocalizationsPl extends AppLocalizations {
   String get watchPoint1 => 'Zainstaluj GymMane na zegarku';
 
   @override
-  String get watchPoint1Body =>
-      'To ta sama aplikacja co w telefonie. Dotknij, aby zobaczyć instrukcję instalacji.';
+  String get watchPoint1Body => 'To ta sama aplikacja co w telefonie. Dotknij, aby zobaczyć instrukcję instalacji.';
 
   @override
   String get watchPoint2 => 'Otwórz GymMane na obu';
 
   @override
-  String get watchPoint2Body =>
-      'Synchronizują się same przez Bluetooth, który już łączy telefon i zegarek. Bez internetu.';
+  String get watchPoint2Body => 'Synchronizują się same przez Bluetooth, który już łączy telefon i zegarek. Bez internetu.';
 
   @override
   String get watchPoint3 => 'Trenuj z zegarkiem';
@@ -8533,8 +8483,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get watchTip =>
-      'Beta: jeszcze nie sprawdzone na każdym zegarku. Jeśli nie działa, napisz na GitHubie.';
+  String get watchTip => 'Beta: jeszcze nie sprawdzone na każdym zegarku. Jeśli nie działa, napisz na GitHubie.';
 
   @override
   String get mineralsTracker => 'Iron and potassium';
@@ -8551,8 +8500,7 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
-  String get mineralsHint =>
-      'Few foods in the list come with iron and potassium, so the total only counts the ones that do. Add them to your own foods or with the AI.';
+  String get mineralsHint => 'Few foods in the list come with iron and potassium, so the total only counts the ones that do. Add them to your own foods or with the AI.';
 
   @override
   String get qsRow => 'Kafelki w szybkich ustawieniach';
@@ -8701,8 +8649,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get recoveryRecent => 'Latest';
 
   @override
-  String get recoveryEmpty =>
-      'Nothing yet. Log a sauna, a cold plunge or a few minutes of breathing: it stays apart from your workouts.';
+  String get recoveryEmpty => 'Nothing yet. Log a sauna, a cold plunge or a few minutes of breathing: it stays apart from your workouts.';
 
   @override
   String get recoveryMinutes => 'Minutes';
@@ -8730,7 +8677,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String recoveryRoundsCount(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n rounds', one: '1 round');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n rounds',
+      one: '1 round',
+    );
     return '$_temp0';
   }
 
@@ -8773,8 +8725,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get mealAiNoData => 'The AI answered in words, with no data';
 
   @override
-  String get mealAiNoDataHint =>
-      'Paste the whole request again. Some assistants refuse when they can’t see the photo or the meal isn’t clear: describe it in one sentence.';
+  String get mealAiNoDataHint => 'Paste the whole request again. Some assistants refuse when they can’t see the photo or the meal isn’t clear: describe it in one sentence.';
 
   @override
   String get mealAiCutOff => 'The answer got cut off';
@@ -8854,8 +8805,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get recoveryTipTitle => 'Before you start';
 
   @override
-  String get recoveryTipBody =>
-      'Drink water, get out if you feel dizzy and never do intense cold alone. If you have a heart or blood pressure condition, ask your doctor first.';
+  String get recoveryTipBody => 'Drink water, get out if you feel dizzy and never do intense cold alone. If you have a heart or blood pressure condition, ask your doctor first.';
 
   @override
   String get recoveryTipOk => 'Got it';
@@ -8887,8 +8837,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get bodyLoadSetting => 'Count your body weight';
 
   @override
-  String get bodyLoadSettingHint =>
-      'Volume uses your body weight that day plus the added weight (minus the help on assisted ones). Records still use the added weight.';
+  String get bodyLoadSettingHint => 'Volume uses your body weight that day plus the added weight (minus the help on assisted ones). Records still use the added weight.';
 
   @override
   String get lengthUnitsLabel => 'Body measurements';
@@ -8917,8 +8866,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get restGlowSetting => 'Light at the end of rest';
 
   @override
-  String get restGlowHint =>
-      'The edges of the screen glow when rest is over, so you notice it even if you cannot hear the beep';
+  String get restGlowHint => 'The edges of the screen glow when rest is over, so you notice it even if you cannot hear the beep';
 
   @override
   String bodyweightRatio(String x) {
@@ -8996,7 +8944,12 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String reportReadings(int n) {
-    String _temp0 = intl.Intl.pluralLogic(n, locale: localeName, other: '$n readings', one: '1 reading');
+    String _temp0 = intl.Intl.pluralLogic(
+      n,
+      locale: localeName,
+      other: '$n readings',
+      one: '1 reading',
+    );
     return '$_temp0';
   }
 
@@ -9028,4 +8981,13 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get nutritionCopyAllHint => 'Also your workout, weight and health data';
+
+  @override
+  String get tplPbPush => 'Playbook · Push-Ups (Lv 1–5)';
+
+  @override
+  String get tplPbPull => 'Playbook · Pull-Ups (Lv 1–5)';
+
+  @override
+  String get tplPbSquat => 'Playbook · Squats (Lv 1–5)';
 }

@@ -2092,7 +2092,6 @@
   "voiceMinutes": "{count, plural, other{{count} phút}}",
   "voiceSeconds": "{count, plural, other{{count} giây}}",
   "voiceAnd": "và",
-
   "repRecordsTitle": "Mức tạ tốt nhất theo số lần",
   "suppUnitCapsule": "{n, plural, other{viên nang}}",
   "suppUnitPill": "{n, plural, other{viên}}",
@@ -2235,10 +2234,8 @@
   "webPhoneOffHow": "Để bật, xóa GYMMANE_SYNC=off khỏi tệp .env của máy chủ rồi khởi động lại.",
   "webPhoneDevices": "{n, plural, =0{Chưa có điện thoại nào đồng bộ} other{Đã đồng bộ {n} điện thoại}}",
   "webPhoneError": "Không đọc được thư mục: {error}",
-
   "duplicateExercise": "Nhân bản",
   "exerciseCopyName": "{name} (bản sao)",
-
   "appIcon": "Biểu tượng ứng dụng",
   "appIconColors": "Màu sắc",
   "appIconDefault": "Gốc",
@@ -2301,7 +2298,6 @@
   "routineNotesAdded": "Đã thêm ghi chú giáo án",
   "todayNotNow": "Để sau",
   "todayRestBody": "Nghỉ ngơi cũng là một phần của kế hoạch. Cơ bắp phát triển khi bạn hồi phục.",
-
   "webSignOut": "Đăng xuất",
   "wearSyncTitle": "Điện thoại",
   "wearSyncNever": "Chưa đồng bộ",
@@ -2388,7 +2384,6 @@
   "watchLast": "Đã đồng bộ {when}.",
   "watchLastWith": "Đã đồng bộ với {name} {when}.",
   "watchTip": "Beta: chưa thử trên mọi đồng hồ. Nếu lỗi, hãy báo trên GitHub.",
-
   "bfAbdomen": "Bụng (ngang rốn)",
   "bfHipWide": "Hông (chỗ rộng nhất)",
   "bfNeckBelow": "Cổ (dưới yết hầu)",
@@ -2419,5 +2414,8 @@
   "qsSubtitle": "Kéo Cài đặt nhanh xuống và vào ngay bằng một chạm, không cần tìm ứng dụng",
   "qsTitle": "Ô trong Cài đặt nhanh",
   "qsToday": "Buổi tập hôm nay",
-  "qsTodayHint": "Giống nhãn NFC: mở những gì đã lên lịch hôm nay"
+  "qsTodayHint": "Giống nhãn NFC: mở những gì đã lên lịch hôm nay",
+  "tplPbPush": "Playbook · Hít đất (Cấp 1–5)",
+  "tplPbPull": "Playbook · Kéo xà (Cấp 1–5)",
+  "tplPbSquat": "Playbook · Squat (Cấp 1–5)"
 }

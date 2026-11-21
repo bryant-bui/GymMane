@@ -8849,4 +8849,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get nutritionCopyAllHint => 'También el entreno, el peso y tus datos de salud';
+
+  @override
+  String get tplPbPush => 'Playbook · Push-Ups (Lv 1–5)';
+
+  @override
+  String get tplPbPull => 'Playbook · Pull-Ups (Lv 1–5)';
+
+  @override
+  String get tplPbSquat => 'Playbook · Squats (Lv 1–5)';
 }

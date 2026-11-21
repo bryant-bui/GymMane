@@ -8680,4 +8680,13 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get nutritionCopyAllHint => 'Also your workout, weight and health data';
+
+  @override
+  String get tplPbPush => 'Playbook · Hít đất (Cấp 1–5)';
+
+  @override
+  String get tplPbPull => 'Playbook · Kéo xà (Cấp 1–5)';
+
+  @override
+  String get tplPbSquat => 'Playbook · Squat (Cấp 1–5)';
 }

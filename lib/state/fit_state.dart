@@ -1068,16 +1068,17 @@ class FitState extends FitCore
     var made = 0;
     final sameDay = <String, String>{};
     for (final day in template.days) {
-      final ids = <String, int>{};
-      for (final (name, sets) in day.exercises) {
-        final found = matchExerciseByName(name);
+      final resolved = <(Exercise, ProgramExercise)>[];
+      final seen = <String>{};
+      for (final entry in day.entries) {
+        final found = matchExerciseByName(entry.name);
         if (found == null) continue;
         final ex = fitsHere(found) ? found : (alternativesHere(found, 1).firstOrNull ?? found);
-        if (ids.containsKey(ex.id)) continue;
-        ids[ex.id] = sets;
+        if (!seen.add(ex.id)) continue;
+        resolved.add((ex, entry));
       }
-      if (ids.isEmpty) continue;
-      final key = '${day.name}|${ids.entries.map((e) => '${e.key}:${e.value}').join(',')}';
+      if (resolved.isEmpty) continue;
+      final key = '${day.name}|${resolved.map((e) => '${e.$1.id}:${e.$2.sets}:${e.$2.reps}:${e.$2.repsMax}:${e.$2.sec}:${e.$2.rest}:${e.$2.superset}').join(',')}';
       final twin = sameDay[key];
       if (twin != null) {
         if (planWasEmpty && day.weekday != null) weeklyPlan[day.weekday!] = twin;
@@ -1086,9 +1087,31 @@ class FitState extends FitCore
       final id = createRoutine(day.name);
       sameDay[key] = id;
       setRoutineGroup(id, template.name);
-      for (final entry in ids.entries) {
-        toggleRoutineExercise(id, entry.key);
-        bumpRoutineSets(id, entry.key, entry.value - kDefaultRoutineSets);
+      for (final (ex, entry) in resolved) {
+        toggleRoutineExercise(id, ex.id);
+        if (entry.hasPlan) {
+          setPlannedSets(
+            id,
+            ex.id,
+            List.generate(
+              entry.sets.clamp(1, 20),
+              (_) => PlannedSet(reps: entry.reps, repsMax: entry.repsMax, sec: entry.sec),
+            ),
+          );
+        } else {
+          bumpRoutineSets(id, ex.id, entry.sets - kDefaultRoutineSets);
+        }
+        if (entry.rest != null) setRoutineRest(id, ex.id, entry.rest);
+        if (entry.superset) toggleChain(id, ex.id);
+        if (entry.note.isNotEmpty) setRoutineExerciseNote(id, ex.id, entry.note);
+      }
+      for (final ladder in day.ladders) {
+        for (final stepId in ladder) {
+          if (seen.contains(stepId)) {
+            setLadder(id, stepId, ladder);
+            break;
+          }
+        }
       }
       if (planWasEmpty && day.weekday != null) weeklyPlan[day.weekday!] = id;
       made++;

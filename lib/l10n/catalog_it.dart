@@ -2597,10 +2597,10 @@ const Map<String, List<String>> kExerciseStepsIt = {
     'Ripeti per il numero di ripetizioni voluto',
   ],
   '7xeukSt': [
-    'Parti in piedi con i piedi alla larghezza delle spalle e le braccia tese davanti a te',
-    'Piega leggermente le ginocchia e piegati in avanti sui fianchi tenendo la schiena dritta',
-    'Abbassa il corpo piegando i gomiti e retraendo le scapole, come per stringere una matita tra di esse',
-    'Fai una pausa in basso, poi spingi sulle mani per estendere i gomiti e tornare alla posizione iniziale',
+    'Sostieniti sulle parallele con le braccia completamente tese e il core contratto',
+    'Mantieni i gomiti bloccati e dritti per tutta la durata del movimento',
+    'Abbassa lentamente il busto tra le spalle lasciando che le scapole salgano verso le orecchie',
+    'Fai una breve pausa in basso, poi spingi forte sulle barre per abbassare le spalle lontano dalle orecchie e sollevare il petto',
     'Ripeti per il numero di ripetizioni voluto',
   ],
   'uTBt1HV': [

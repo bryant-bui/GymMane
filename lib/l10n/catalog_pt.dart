@@ -2784,10 +2784,10 @@ const Map<String, List<String>> kExerciseStepsPt = {
     'Repita o movimento pelo número desejado de repetições.',
   ],
   '7xeukSt': [
-    'Fique em pé com os pés afastados na largura dos ombros e os braços estendidos à frente do corpo.',
-    'Flexione levemente os joelhos e incline o tronco à frente pelo quadril, mantendo as costas retas.',
-    'Flexione os cotovelos e aproxime as escápulas, como se tentasse prender um lápis entre elas.',
-    'Faça uma breve pausa na parte inferior e empurre com as mãos para estender os cotovelos e voltar à posição inicial.',
+    'Apoie-se nas barras paralelas com os braços totalmente estendidos e o core contraído.',
+    'Mantenha os cotovelos travados e retos durante todo o movimento.',
+    'Abaixe lentamente o tronco entre os ombros, permitindo que as escápulas subam em direção às orelhas.',
+    'Faça uma breve pausa na parte inferior e empurre firmemente as barras para deprimir os ombros para longe das orelhas e elevar o peito.',
     'Repita o movimento pelo número desejado de repetições.',
   ],
   'uTBt1HV': [
