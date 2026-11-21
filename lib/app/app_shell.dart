@@ -394,6 +394,8 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver, Single
   @override
   void didChangePlatformBrightness() => fit.systemBrightnessChanged();
 
+  bool _sidebarCollapsed = false;
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.inactive ||
@@ -422,7 +424,11 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver, Single
         if (!fit.onboarded) {
           return const OnboardingScreen();
         }
-        final wide = DesktopScope.wideFor(MediaQuery.sizeOf(context).width);
+        final size = MediaQuery.sizeOf(context);
+        final wide = DesktopScope.wideFor(size.width, size.height);
+        final sideW = !wide
+            ? 0.0
+            : (_sidebarCollapsed ? DesktopScope.sidebarCollapsedWidth : DesktopScope.sidebarWidth);
         final parked = fit.sessionParked && fit.showNav && !wide;
 
         return PopScope(
@@ -470,15 +476,18 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver, Single
                       ),
                       Scaffold(
                         backgroundColor: Colors.transparent,
-                        body: Padding(
+                        body: AnimatedPadding(
+                          duration: const Duration(milliseconds: 220),
+                          curve: Curves.easeOutCubic,
                           padding: EdgeInsetsDirectional.only(
-                              start: wide ? DesktopScope.sidebarWidth : 0,
+                              start: sideW,
                               bottom: (MediaQuery.viewInsetsOf(context).bottom > 0
                                       ? 0
                                       : MediaQuery.viewPaddingOf(context).bottom) +
                                   (parked ? _pillSpace : 0)),
                           child: DesktopScope(
                             wide: wide,
+                            flex: DesktopScope.flexFor(MediaQuery.of(context)),
                             child: NotificationListener<ScrollNotification>(
                               onNotification: _onScroll,
                               child: RepaintBoundary(child: _animatedScreen()),
@@ -490,15 +499,23 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver, Single
                   ),
                 ),
                 if (wide)
-                  const PositionedDirectional(
+                  AnimatedPositionedDirectional(
+                    duration: const Duration(milliseconds: 220),
+                    curve: Curves.easeOutCubic,
                     start: 16,
                     top: 16,
                     bottom: 16,
-                    width: DesktopScope.sidebarWidth - 32,
-                    child: Material(type: MaterialType.transparency, child: _Sidebar()),
+                    width: sideW - 32,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: _Sidebar(
+                        collapsed: _sidebarCollapsed,
+                        onToggle: () => setState(() => _sidebarCollapsed = !_sidebarCollapsed),
+                      ),
+                    ),
                   ),
                 PositionedDirectional(
-                  start: wide ? DesktopScope.sidebarWidth : 0,
+                  start: sideW,
                   end: 0,
                   top: 0,
                   child: _blurTop.contains(fit.route)
@@ -514,32 +531,44 @@ class _AppShellState extends State<AppShell> with WidgetsBindingObserver, Single
                         top: false, height: 128 + MediaQuery.viewPaddingOf(context).bottom + (parked ? _pillSpace : 0)),
                   ),
                 if (fit.showNav && !wide && MediaQuery.viewInsetsOf(context).bottom < 60) ...[
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    bottom: 18 + MediaQuery.viewPaddingOf(context).bottom,
-                    child: RepaintBoundary(
-                      child: Directionality(textDirection: TextDirection.ltr, child: _NavBar()),
-                    ),
-                  ),
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    bottom: 18 + _NavBarState.height + 10 + MediaQuery.viewPaddingOf(context).bottom,
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 320),
-                      switchInCurve: Curves.easeOutCubic,
-                      switchOutCurve: Curves.easeInCubic,
-                      transitionBuilder: (child, a) => FadeTransition(
-                        opacity: a,
-                        child: SlideTransition(
-                          position: Tween(begin: const Offset(0, 0.4), end: Offset.zero).animate(a),
-                          child: child,
-                        ),
+                  Builder(builder: (context) {
+                    final screenW = MediaQuery.sizeOf(context).width;
+                    final navInset = screenW < 340
+                        ? 10.0
+                        : (screenW >= 520 ? (screenW - 440.0) / 2.0 : 24.0);
+                    return Positioned(
+                      left: navInset,
+                      right: navInset,
+                      bottom: 18 + MediaQuery.viewPaddingOf(context).bottom,
+                      child: RepaintBoundary(
+                        child: Directionality(textDirection: TextDirection.ltr, child: _NavBar()),
                       ),
-                      child: parked ? const _ParkedPill() : const SizedBox(width: double.infinity),
-                    ),
-                  ),
+                    );
+                  }),
+                  Builder(builder: (context) {
+                    final screenW = MediaQuery.sizeOf(context).width;
+                    final navInset = screenW < 340
+                        ? 10.0
+                        : (screenW >= 520 ? (screenW - 440.0) / 2.0 : 24.0);
+                    return Positioned(
+                      left: navInset,
+                      right: navInset,
+                      bottom: 18 + _NavBarState.height + 10 + MediaQuery.viewPaddingOf(context).bottom,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 320),
+                        switchInCurve: Curves.easeOutCubic,
+                        switchOutCurve: Curves.easeInCubic,
+                        transitionBuilder: (child, a) => FadeTransition(
+                          opacity: a,
+                          child: SlideTransition(
+                            position: Tween(begin: const Offset(0, 0.4), end: Offset.zero).animate(a),
+                            child: child,
+                          ),
+                        ),
+                        child: parked ? const _ParkedPill() : const SizedBox(width: double.infinity),
+                      ),
+                    );
+                  }),
                 ],
                 if (fit.countdownUntil != null && fit.session != null)
                   Positioned.fill(
@@ -909,10 +938,11 @@ class _NavBar extends StatefulWidget {
 
 class _NavBarState extends State<_NavBar> {
   static const height = 68.0;
-  static const _iw = 58.0;
-  static const _fabW = 48.0;
   static const _routes = ['home', 'progress', 'exercises', 'settings'];
 
+  double _iw = 58.0;
+  double _fabW = 48.0;
+  double _hPad = 14.0;
   double? _dragX;
   int? _hover;
   int? _pressed;
@@ -946,7 +976,7 @@ class _NavBarState extends State<_NavBar> {
     final near = _nearest(x);
     if (near != _hover) HapticFeedback.selectionClick();
     setState(() {
-      _dragX = x.clamp(_iw / 2, _slotW - _iw / 2);
+      _dragX = x.clamp(_iw / 2, math.max(_iw / 2, _slotW - _iw / 2));
       _hover = near;
     });
   }
@@ -970,9 +1000,13 @@ class _NavBarState extends State<_NavBar> {
     final gc = context.gc;
     return LayoutBuilder(
         builder: (context, c) {
-          _slotW = c.maxWidth - 28;
-          _gap = ((_slotW - 4 * _iw - _fabW) / 4).clamp(0.0, 40.0);
+          _hPad = c.maxWidth < 300 ? 8.0 : 14.0;
+          _slotW = math.max(160.0, c.maxWidth - _hPad * 2);
+          _fabW = _slotW < 250 ? 40.0 : 48.0;
+          _iw = math.min(58.0, (_slotW - _fabW) / 4.0);
+          _gap = math.max(0.0, (_slotW - 4 * _iw - _fabW) / 4.0);
           final drag = _dragX;
+          final pillPad = math.min(6.0, _gap * 0.2);
 
           return Stack(
             clipBehavior: Clip.none,
@@ -994,20 +1028,20 @@ class _NavBarState extends State<_NavBar> {
                 ),
               ),
               Positioned(
-                left: 14,
-                right: 14,
+                left: _hPad,
+                right: _hPad,
                 top: 0,
                 bottom: 0,
                 child: _LiquidPill(
-                  left: _slotX(_selectedIndex) - _gap * 0.2,
-                  dragLeft: drag == null ? null : drag - _iw / 2 - _gap * 0.2,
-                  width: _iw + _gap * 0.4,
+                  left: _slotX(_selectedIndex) - pillPad,
+                  dragLeft: drag == null ? null : drag - _iw / 2 - pillPad,
+                  width: _iw + pillPad * 2,
                   color: gc.text.withValues(alpha: fit.dark ? 0.13 : 0.08),
                 ),
               ),
               Positioned(
-                left: 14,
-                right: 14,
+                left: _hPad,
+                right: _hPad,
                 top: 0,
                 bottom: 0,
                 child: GestureDetector(
@@ -1053,6 +1087,7 @@ class _NavBarState extends State<_NavBar> {
     final selected = _selectedIndex == index;
     final lifted = selected && _dragX != null;
     final pressed = _pressed == index && _dragX == null;
+    final iconSize = _iw < 50 ? 22.0 : 24.0;
 
     return Semantics(
       button: true,
@@ -1087,8 +1122,8 @@ class _NavBarState extends State<_NavBar> {
               builder: (context, v, _) => Stack(
                 alignment: Alignment.center,
                 children: [
-                  Opacity(opacity: 0.7 * (1 - v), child: Icon(icon, size: 24, color: gc.text)),
-                  Opacity(opacity: v, child: Icon(iconFill, size: 24, color: gc.text)),
+                  Opacity(opacity: 0.7 * (1 - v), child: Icon(icon, size: iconSize, color: gc.text)),
+                  Opacity(opacity: v, child: Icon(iconFill, size: iconSize, color: gc.text)),
                 ],
               ),
             ),
@@ -1119,7 +1154,7 @@ class _NavBarState extends State<_NavBar> {
             BoxShadow(color: gc.accent.withValues(alpha: 0.45), blurRadius: 18, offset: const Offset(0, 6)),
           ],
         ),
-        child: Icon(PhosphorIconsFill.play, size: 21, color: gc.bg),
+        child: Icon(PhosphorIconsFill.play, size: _fabW < 44 ? 19 : 21, color: gc.bg),
       ),
     );
   }
@@ -1280,7 +1315,10 @@ class _SoftCopy extends CustomPainter {
 }
 
 class _Sidebar extends StatelessWidget {
-  const _Sidebar();
+  const _Sidebar({required this.collapsed, required this.onToggle});
+
+  final bool collapsed;
+  final VoidCallback onToggle;
 
   static const _main = [
     ('home', PhosphorIconsRegular.house, PhosphorIconsFill.house),
@@ -1352,80 +1390,121 @@ class _Sidebar extends StatelessWidget {
     final gc = context.gc;
     final active = _active;
     final live = fit.isSessionActive;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(14, 20, 14, 16),
-      decoration: BoxDecoration(
-        color: gc.bgRaised.withValues(alpha: 0.72),
-        borderRadius: BorderRadius.circular(28),
-      ),
-      child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Padding(
-          padding: const EdgeInsetsDirectional.only(start: 6),
-          child: Row(children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.asset('assets/img/app_icon.png', width: 34, height: 34, filterQuality: FilterQuality.medium),
-            ),
-            const SizedBox(width: 11),
-            Expanded(
-              child: Text('GymMane',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text, letterSpacing: -0.4)),
-            ),
-          ]),
+    return LayoutBuilder(builder: (context, box) {
+      final compact = collapsed || box.maxWidth < 150;
+      return Container(
+        padding: EdgeInsets.fromLTRB(compact ? 8 : 14, 18, compact ? 8 : 14, 14),
+        decoration: BoxDecoration(
+          color: gc.bgRaised.withValues(alpha: 0.72),
+          borderRadius: BorderRadius.circular(28),
         ),
-        const SizedBox(height: 24),
-        _StartButton(live: live),
-        const SizedBox(height: 22),
-        for (final (id, icon, fill) in _main) ...[
-          _SideItem(
-            label: _label(id),
-            icon: icon,
-            iconFill: fill,
-            selected: active == id,
-            onTap: () => _go(id),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          if (compact)
+            Center(
+              child: GestureDetector(
+                key: const Key('sidebar-toggle'),
+                behavior: HitTestBehavior.opaque,
+                onTap: onToggle,
+                child: Container(
+                  width: 38,
+                  height: 38,
+                  decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(12)),
+                  child: Icon(PhosphorIconsRegular.caretRight, size: 17, color: gc.text),
+                ),
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsetsDirectional.only(start: 6),
+              child: Row(children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset('assets/img/app_icon.png', width: 34, height: 34, filterQuality: FilterQuality.medium),
+                ),
+                const SizedBox(width: 11),
+                Expanded(
+                  child: Text('GymMane',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.f(19, weight: FontWeight.w800, color: gc.text, letterSpacing: -0.4)),
+                ),
+                GestureDetector(
+                  key: const Key('sidebar-toggle'),
+                  behavior: HitTestBehavior.opaque,
+                  onTap: onToggle,
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(color: gc.bgRaised2, borderRadius: BorderRadius.circular(10)),
+                    child: Icon(PhosphorIconsRegular.caretLeft, size: 15, color: gc.textSecondary),
+                  ),
+                ),
+              ]),
+            ),
+          const SizedBox(height: 18),
+          _StartButton(live: live, collapsed: compact),
+          const SizedBox(height: 16),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+                for (final (id, icon, fill) in _main) ...[
+                  _SideItem(
+                    label: _label(id),
+                    icon: icon,
+                    iconFill: fill,
+                    selected: active == id,
+                    collapsed: compact,
+                    onTap: () => _go(id),
+                  ),
+                  const SizedBox(height: 4),
+                ],
+                const SizedBox(height: 14),
+                for (final (id, icon, fill) in [
+                  ('routines', PhosphorIconsRegular.listChecks, PhosphorIconsFill.listChecks),
+                  ('notes', PhosphorIconsRegular.notebook, PhosphorIconsFill.notebook),
+                  ('tools', PhosphorIconsRegular.calculator, PhosphorIconsFill.calculator),
+                  if (fit.nutritionBeta) ('nutrition', PhosphorIconsRegular.forkKnife, PhosphorIconsFill.forkKnife),
+                  if (fit.recoveryOn) ('recovery', PhosphorIconsRegular.thermometerSimple, PhosphorIconsFill.thermometerSimple),
+                ]) ...[
+                  _SideItem(
+                    label: _label(id),
+                    icon: icon,
+                    iconFill: fill,
+                    selected: active == id,
+                    small: true,
+                    collapsed: compact,
+                    onTap: () => _go(id),
+                  ),
+                  const SizedBox(height: 2),
+                ],
+              ]),
+            ),
           ),
-          const SizedBox(height: 4),
-        ],
-        const SizedBox(height: 18),
-        for (final (id, icon, fill) in [
-          ('routines', PhosphorIconsRegular.listChecks, PhosphorIconsFill.listChecks),
-          ('notes', PhosphorIconsRegular.notebook, PhosphorIconsFill.notebook),
-          ('tools', PhosphorIconsRegular.calculator, PhosphorIconsFill.calculator),
-          if (fit.nutritionBeta) ('nutrition', PhosphorIconsRegular.forkKnife, PhosphorIconsFill.forkKnife),
-          if (fit.recoveryOn) ('recovery', PhosphorIconsRegular.thermometerSimple, PhosphorIconsFill.thermometerSimple),
-        ]) ...[
+          const SizedBox(height: 8),
           _SideItem(
-            label: _label(id),
-            icon: icon,
-            iconFill: fill,
-            selected: active == id,
+            label: _label('preferences'),
+            icon: PhosphorIconsRegular.gearSix,
+            iconFill: PhosphorIconsFill.gearSix,
+            selected: active == 'preferences',
             small: true,
-            onTap: () => _go(id),
+            collapsed: compact,
+            onTap: () => _go('preferences'),
           ),
-          const SizedBox(height: 2),
-        ],
-        const Spacer(),
-        _SideItem(
-          label: _label('preferences'),
-          icon: PhosphorIconsRegular.gearSix,
-          iconFill: PhosphorIconsFill.gearSix,
-          selected: active == 'preferences',
-          small: true,
-          onTap: () => _go('preferences'),
-        ),
-        const SizedBox(height: 10),
-        const _ServerStatus(),
-      ]),
-    );
+          if (!compact) ...[
+            const SizedBox(height: 10),
+            const _ServerStatus(),
+          ],
+        ]),
+      );
+    });
   }
 }
 
 class _StartButton extends StatelessWidget {
-  const _StartButton({required this.live});
+  const _StartButton({required this.live, this.collapsed = false});
 
   final bool live;
+  final bool collapsed;
 
   @override
   Widget build(BuildContext context) {
@@ -1436,17 +1515,19 @@ class _StartButton extends StatelessWidget {
       child: Semantics(
         button: true,
         child: Container(
-          height: 48,
+          height: collapsed ? 42 : 48,
           decoration: BoxDecoration(color: gc.ember, borderRadius: BorderRadius.circular(100)),
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(PhosphorIconsFill.play, size: 15, color: gc.onEmber),
-            const SizedBox(width: 9),
-            Flexible(
-              child: FitText(live ? t.keepTraining : sentenceCase(t.startWorkout),
-                  style: AppTheme.f(14.5, weight: FontWeight.w800, color: gc.onEmber)),
-            ),
-          ]),
+          padding: EdgeInsets.symmetric(horizontal: collapsed ? 0 : 18),
+          child: collapsed
+              ? Center(child: Icon(PhosphorIconsFill.play, size: 15, color: gc.onEmber))
+              : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Icon(PhosphorIconsFill.play, size: 15, color: gc.onEmber),
+                  const SizedBox(width: 9),
+                  Flexible(
+                    child: FitText(live ? t.keepTraining : sentenceCase(t.startWorkout),
+                        style: AppTheme.f(14.5, weight: FontWeight.w800, color: gc.onEmber)),
+                  ),
+                ]),
         ),
       ),
     );
@@ -1461,6 +1542,7 @@ class _SideItem extends StatefulWidget {
     required this.selected,
     required this.onTap,
     this.small = false,
+    this.collapsed = false,
   });
 
   final String label;
@@ -1468,6 +1550,7 @@ class _SideItem extends StatefulWidget {
   final IconData iconFill;
   final bool selected;
   final bool small;
+  final bool collapsed;
   final VoidCallback onTap;
 
   @override
@@ -1497,23 +1580,31 @@ class _SideItemState extends State<_SideItem> {
             duration: const Duration(milliseconds: 180),
             curve: Curves.easeOutCubic,
             height: h,
-            padding: const EdgeInsetsDirectional.only(start: 14, end: 10),
+            padding: widget.collapsed
+                ? EdgeInsets.zero
+                : const EdgeInsetsDirectional.only(start: 14, end: 10),
             decoration: BoxDecoration(
               color: on ? gc.bgRaised2 : (_hover ? gc.bgRaised2.withValues(alpha: 0.5) : Colors.transparent),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Row(children: [
-              Icon(on ? widget.iconFill : widget.icon,
-                  size: widget.small ? 17 : 19, color: on ? gc.text : gc.textSecondary),
-              const SizedBox(width: 13),
-              Expanded(
-                child: Text(widget.label,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.f(widget.small ? 13.5 : 14.5,
-                        weight: on ? FontWeight.w800 : FontWeight.w600, color: on ? gc.text : gc.textSecondary)),
-              ),
-            ]),
+            child: widget.collapsed
+                ? Center(
+                    child: Icon(on ? widget.iconFill : widget.icon,
+                        size: widget.small ? 18 : 20, color: on ? gc.text : gc.textSecondary),
+                  )
+                : Row(children: [
+                    Icon(on ? widget.iconFill : widget.icon,
+                        size: widget.small ? 17 : 19, color: on ? gc.text : gc.textSecondary),
+                    const SizedBox(width: 13),
+                    Expanded(
+                      child: Text(widget.label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTheme.f(widget.small ? 13.5 : 14.5,
+                              weight: on ? FontWeight.w800 : FontWeight.w600,
+                              color: on ? gc.text : gc.textSecondary)),
+                    ),
+                  ]),
           ),
         ),
       ),

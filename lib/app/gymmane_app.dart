@@ -121,7 +121,11 @@ class _WebFrame extends StatelessWidget {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context);
     final size = media.size;
-    if (size.width <= _column + 40 || DesktopScope.wideFor(size.width)) return child;
+    if (size.width <= _column + 40 ||
+        DesktopScope.wideFor(size.width, size.height) ||
+        DesktopScope.foldableFor(size.width)) {
+      return child;
+    }
     return ColoredBox(
       color: context.gc.bg,
       child: Center(

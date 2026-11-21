@@ -309,11 +309,12 @@ class GhostButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final gc = context.gc;
+    final compact = MediaQuery.sizeOf(context).width < 340;
     return Pressable(
       onTap: onTap,
       child: Container(
         height: 46,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: compact ? 12 : 20),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: context.gc.bgRaised2,
@@ -323,12 +324,14 @@ class GhostButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(icon, size: 16, color: gc.ember),
-            const SizedBox(width: 8),
+            SizedBox(width: compact ? 6 : 8),
             Flexible(
-              child: Text(titleCase(label),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: AppTheme.f(13.5, weight: FontWeight.w700, color: gc.text)),
+              child: Text(
+                titleCase(label),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTheme.f(13.5, weight: FontWeight.w700, color: gc.text),
+              ),
             ),
           ],
         ),

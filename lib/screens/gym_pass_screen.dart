@@ -159,22 +159,46 @@ class GymPassEmpty extends StatelessWidget {
         aspectRatio: kPassRatio,
         child: CustomPaint(
           painter: _DashedCard(gc.text.withValues(alpha: 0.18)),
-          child: Padding(
-            padding: const EdgeInsets.all(22),
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(
-                width: 46,
-                height: 46,
-                decoration: BoxDecoration(color: gc.text.withValues(alpha: 0.09), shape: BoxShape.circle),
-                child: Icon(PhosphorIconsRegular.qrCode, size: 22, color: gc.text),
-              ),
-              const SizedBox(height: 14),
-              Text(t.gymPassAdd, style: AppTheme.f(15, weight: FontWeight.w800, color: gc.text)),
-              const SizedBox(height: 4),
-              Text(t.gymPassEmpty,
-                  textAlign: TextAlign.center,
-                  style: AppTheme.f(12.5, weight: FontWeight.w500, color: gc.textSecondary, height: 1.35)),
-            ]),
+          child: LayoutBuilder(
+            builder: (context, box) {
+              final compact = box.maxHeight < 190 || box.maxWidth < 260;
+              return Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: compact ? 14 : 22,
+                  vertical: compact ? 10 : 22,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: compact ? 34 : 46,
+                      height: compact ? 34 : 46,
+                      decoration: BoxDecoration(color: gc.text.withValues(alpha: 0.09), shape: BoxShape.circle),
+                      child: Icon(PhosphorIconsRegular.qrCode, size: compact ? 17 : 22, color: gc.text),
+                    ),
+                    SizedBox(height: compact ? 6 : 14),
+                    Text(
+                      t.gymPassAdd,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.f(compact ? 13.5 : 15, weight: FontWeight.w800, color: gc.text),
+                    ),
+                    SizedBox(height: compact ? 2 : 4),
+                    Flexible(
+                      child: Text(
+                        t.gymPassEmpty,
+                        textAlign: TextAlign.center,
+                        maxLines: compact ? 2 : 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: AppTheme.f(compact ? 11 : 12.5,
+                            weight: FontWeight.w500, color: gc.textSecondary, height: 1.3),
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
           ),
         ),
       ),

@@ -77,14 +77,20 @@ class RoutinesScreen extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 8),
-        SegToggle(
-          [
-            SegOption(t.planFixedWeek, !fit.rotation, () => fit.setRotation(false)),
-            SegOption(t.planRotation, fit.rotation, () => fit.setRotation(true)),
-          ],
-          hPad: 10,
-          vPad: 5,
-          fontSize: 11,
+        Flexible(
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerRight,
+            child: SegToggle(
+              [
+                SegOption(t.planFixedWeek, !fit.rotation, () => fit.setRotation(false)),
+                SegOption(t.planRotation, fit.rotation, () => fit.setRotation(true)),
+              ],
+              hPad: 10,
+              vPad: 5,
+              fontSize: 11,
+            ),
+          ),
         ),
       ]),
       const SizedBox(height: 10),
@@ -1155,7 +1161,7 @@ class RoutinesScreen extends StatelessWidget {
 
   Widget _folders(BuildContext context, List<Routine> list) {
     return LayoutBuilder(builder: (context, box) {
-      final n = (box.maxWidth / 250).floor().clamp(2, 4);
+      final n = box.maxWidth < 290 ? 1 : (box.maxWidth / 250).floor().clamp(2, 4);
       return Column(children: [
         for (var i = 0; i < list.length; i += n)
           Padding(
