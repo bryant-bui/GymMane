@@ -83,6 +83,24 @@ class ProgressScreen extends StatelessWidget {
       );
     }
 
+    if (DesktopScope.foldableFor(MediaQuery.sizeOf(context).width)) {
+      return RiseScope(
+        id: 'progress',
+        child: SafeArea(
+          bottom: false,
+          child: SingleChildScrollView(
+            clipBehavior: Clip.none,
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 110),
+            child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+              Rise(index: 0, child: header),
+              const SizedBox(height: 20),
+              CardFlow(minColumn: 260, gap: 14, children: riseAll(cards, from: 1)),
+            ]),
+          ),
+        ),
+      );
+    }
+
     return RiseScope(
       id: 'progress',
       child: SafeArea(
@@ -1368,7 +1386,15 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
           ),
           const SizedBox(height: 16),
           Row(children: [
-            Text(t.heatLow, style: AppTheme.s(11, color: gc.textTertiary)),
+            Flexible(
+              flex: 2,
+              child: Text(
+                t.heatLow,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: AppTheme.s(11, color: gc.textTertiary),
+              ),
+            ),
             const SizedBox(width: 8),
             for (int i = 0; i <= heatLevels; i++) ...[
               if (i > 0) const SizedBox(width: 3),
@@ -1383,7 +1409,16 @@ class _MuscleMapCardState extends State<_MuscleMapCard> {
               ),
             ],
             const SizedBox(width: 8),
-            Text(t.heatHigh, style: AppTheme.s(11, color: gc.textTertiary)),
+            Flexible(
+              flex: 2,
+              child: Text(
+                t.heatHigh,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.end,
+                style: AppTheme.s(11, color: gc.textTertiary),
+              ),
+            ),
           ]),
           const SizedBox(height: 14),
           Container(

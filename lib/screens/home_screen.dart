@@ -38,6 +38,15 @@ class HomeScreen extends StatelessWidget {
     final routines = fit.routinesByLastDone;
     if (DesktopScope.of(context)) return _desktop(context, gc, routines, recommended);
 
+    final width = MediaQuery.sizeOf(context).width;
+    if (DesktopScope.flexOf(context)) {
+      return _flex(context, gc, routines, recommended);
+    }
+    if (DesktopScope.foldableFor(width)) {
+      return _foldable(context, gc, routines, recommended);
+    }
+
+    final hPad = width < 340 ? 12.0 : 20.0;
     return RiseScope(
       id: 'home',
       child: SafeArea(
@@ -45,7 +54,7 @@ class HomeScreen extends StatelessWidget {
       child: SingleChildScrollView(
         key: const PageStorageKey('home'),
         clipBehavior: Clip.none,
-        padding: const EdgeInsets.fromLTRB(20, 14, 20, 116),
+        padding: EdgeInsets.fromLTRB(hPad, 14, hPad, 116),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: riseAll([
@@ -63,6 +72,108 @@ class HomeScreen extends StatelessWidget {
           ]),
         ),
       ),
+      ),
+    );
+  }
+
+  Widget _flex(BuildContext context, GymColors gc, List<Routine> routines, List<Exercise> recommended) {
+    final hero = fit.showFocus || fit.todayRoutine?.exerciseIds.isNotEmpty == true;
+    return RiseScope(
+      id: 'home',
+      child: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                key: const PageStorageKey('home-flex-top'),
+                padding: const EdgeInsets.fromLTRB(20, 14, 20, 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _topBar(gc),
+                    const SizedBox(height: 14),
+                    if (hero) _hero(context, gc),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              height: 6,
+              color: gc.bgRaised,
+              child: Center(
+                child: Container(
+                  width: 48,
+                  height: 2,
+                  decoration: BoxDecoration(
+                    color: gc.ember.withValues(alpha: 0.6),
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                key: const PageStorageKey('home-flex-bottom'),
+                padding: const EdgeInsets.fromLTRB(20, 12, 20, 116),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    if (fit.photoDue) ...[
+                      _photoNudge(gc),
+                      const SizedBox(height: 14),
+                    ],
+                    ..._homeBlocks(context, gc, routines, recommended),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _foldable(BuildContext context, GymColors gc, List<Routine> routines, List<Exercise> recommended) {
+    final blocks = _blockMap(context, gc, routines, recommended);
+    Widget one(List<Widget> b) =>
+        b.length == 1 ? b.single : Column(crossAxisAlignment: CrossAxisAlignment.stretch, mainAxisSize: MainAxisSize.min, children: b);
+    final hero = fit.showFocus || fit.todayRoutine?.exerciseIds.isNotEmpty == true;
+    final tiles = <Widget>[];
+    final wraps = <Widget Function(Widget)>[];
+    void add(Widget w, Widget Function(Widget) wrap) {
+      tiles.add(w);
+      wraps.add(wrap);
+    }
+    if (hero) add(_hero(context, gc), (c) => FlowSlot(child: c));
+    if (fit.photoDue) add(_photoNudge(gc), (c) => FlowSlot(child: c));
+    for (final id in fit.homeOrderShown) {
+      if (blocks[id] case final b? when b.isNotEmpty) {
+        add(one(b), id == 'recommended' || (id == 'activity' && fit.heatmapYear)
+            ? (c) => FlowWide(child: c)
+            : (c) => FlowSlot(child: c));
+      }
+    }
+    final risen = riseAll(tiles, from: 1);
+    return RiseScope(
+      id: 'home',
+      child: SafeArea(
+        bottom: false,
+        child: SingleChildScrollView(
+          key: const PageStorageKey('home'),
+          clipBehavior: Clip.none,
+          padding: const EdgeInsets.fromLTRB(20, 14, 20, 116),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Rise(index: 0, child: _topBar(gc)),
+              const SizedBox(height: 20),
+              CardFlow(minColumn: 260, gap: 16, children: [
+                for (var i = 0; i < risen.length; i++) wraps[i](risen[i]),
+              ]),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -197,7 +308,7 @@ class HomeScreen extends StatelessWidget {
                     itemCount: routines.length,
                     separatorBuilder: (_, _) => const SizedBox(width: 12),
                     itemBuilder: (_, i) => SizedBox(
-                      width: (box.maxWidth - 12) / 2,
+                      width: box.maxWidth < 310 ? box.maxWidth * 0.82 : (box.maxWidth - 12) / 2,
                       child: RoutineFolder(
                         routine: routines[i],
                         lastDone: true,
@@ -379,10 +490,16 @@ class HomeScreen extends StatelessWidget {
           height: 30,
           child: Row(
             children: [
-              Text(titleCase(title),
-                  style: AppTheme.f(13, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 0)),
-              const Spacer(),
-              if (onMore != null)
+              Expanded(
+                child: Text(
+                  titleCase(title),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTheme.f(13, weight: FontWeight.w700, color: gc.textTertiary, letterSpacing: 0),
+                ),
+              ),
+              if (onMore != null) ...[
+                const SizedBox(width: 8),
                 Container(
                   height: 28,
                   padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -390,6 +507,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(color: gc.bgRaised, borderRadius: BorderRadius.circular(14)),
                   child: Text(t.healthSeeAll, style: AppTheme.f(12, weight: FontWeight.w700, color: gc.text)),
                 ),
+              ],
             ],
           ),
         ),
@@ -499,7 +617,7 @@ class HomeScreen extends StatelessWidget {
                   ]),
                   const SizedBox(height: 9),
                   Padding(
-                    padding: const EdgeInsets.only(right: 96),
+                    padding: EdgeInsets.only(right: MediaQuery.sizeOf(context).width < 340 ? 64 : 96),
                     child: Text(title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

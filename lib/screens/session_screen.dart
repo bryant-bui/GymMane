@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../app/desktop.dart';
 import '../widgets/race_sheet.dart';
 import '../widgets/body_map.dart';
 import 'package:flutter/services.dart';
@@ -41,11 +42,12 @@ class SessionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final gc = context.gc;
     if (fit.listLayout && !fit.isSessionComplete && fit.session != null) return _listScreen(context, gc);
+    final hPad = MediaQuery.sizeOf(context).width < 340 ? 10.0 : 20.0;
     return SafeArea(
       bottom: false,
       child: SingleChildScrollView(
         clipBehavior: Clip.none,
-        padding: const EdgeInsets.fromLTRB(20, 12, 20, 32),
+        padding: EdgeInsets.fromLTRB(hPad, 12, hPad, 32),
         child: fit.isSessionComplete ? _complete(context, gc) : _active(context, gc),
       ),
     );
@@ -93,6 +95,161 @@ class SessionScreen extends StatelessWidget {
     final loops = fit.demoLoop == 'short' ? 6 : null;
     final mode = ex == null ? '' : fit.modeOf(ex.id);
     final second = _secondAction(gc, ex, exIdx, mode, repsOnly);
+    final flex = DesktopScope.flexOf(context);
+    final wideFold = !flex && DesktopScope.foldableFor(MediaQuery.sizeOf(context).width);
+    final stageAndTimers = <Widget>[
+      _ExerciseStage(
+        index: exIdx,
+        haptic: true,
+        autoMoves: fit.autoMoves,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (demo == 'small')
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: _exerciseHeader(context, gc, ex)),
+                  const SizedBox(width: 14),
+                  SizedBox(
+                    width: 104,
+                    child: _guard(
+                      locked,
+                      GestureDetector(
+                        onTap: () => showExercisePreview(context, def),
+                        child: ExerciseMedia(
+                            ex: def, height: 104, radius: 18, live: true, loops: loops),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            else
+              _exerciseHeader(context, gc, ex),
+            if (demo == 'large') ...[
+              const SizedBox(height: 14),
+              _guard(
+                locked,
+                GestureDetector(
+                  onTap: () => showExercisePreview(context, def),
+                  child: ExerciseMedia(ex: def, height: 170, live: true, loops: loops),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+      const SizedBox(height: 18),
+      AnimatedSize(
+        duration: const Duration(milliseconds: 320),
+        curve: Curves.easeOutCubic,
+        alignment: Alignment.topCenter,
+        child: fit.holding && fit.holdEx == exIdx
+            ? Padding(padding: const EdgeInsets.only(bottom: 16), child: _holdCard(gc))
+            : s.restRemaining != null
+                ? Padding(padding: const EdgeInsets.only(bottom: 16), child: _restCard(context, gc, s))
+                : const SizedBox(width: double.infinity),
+      ),
+    ];
+
+    final setsAndControls = <Widget>[
+      _ExerciseStage(
+        index: exIdx,
+        child: Container(
+          padding: const EdgeInsets.fromLTRB(_cardPad, 16, _cardPad, 16),
+          decoration: BoxDecoration(
+            color: gc.bgRaised,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(_rowPad, 0, _rowPad, 10),
+                child: _setsHeader(gc, mode, repsOnly, ex != null && (fit.isEachSide(ex.id) || fit.isSidedReps(ex.id)), exId: ex?.id),
+              ),
+              for (int j = 0; j < (ex?.sets.length ?? 0); j++) ...[
+                _swipeSet(context, gc, exIdx, j, ex!.sets[j], locked,
+                    _setRow(gc, exIdx, j, ex.sets[j], repsOnly, locked)),
+              ],
+              if (!repsOnly && mode.isEmpty && ex != null) _guard(locked, _plateRow(context, gc, ex)),
+              const SizedBox(height: 10),
+              _guard(
+                locked,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: _rowPad),
+                  child: Row(
+                    children: [
+                      Expanded(child: _dashedAction(gc, t.addSet, () => fit.addSet(exIdx))),
+                      if (second != null) ...[
+                        const SizedBox(width: 8),
+                        Expanded(child: second),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      const SizedBox(height: 22),
+      _guard(
+        locked,
+        Row(
+        children: [
+          Expanded(
+            child: GhostButton(
+              label: t.addExercise,
+              icon: PhosphorIconsRegular.plus,
+              onTap: () => showAddToSessionSheet(context),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Semantics(
+            button: true,
+            label: t.addNote,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () => ex == null ? fit.openNoteEditor() : showWorkoutNoteEditor(context, ex.id),
+              child: Container(
+                width: 46,
+                height: 46,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Icon(PhosphorIconsRegular.notePencil, size: 17, color: gc.ember),
+              ),
+            ),
+          ),
+        ],
+        ),
+      ),
+      const SizedBox(height: 16),
+      Row(children: [
+        _circleBtn(gc, Ic.chevronLeft, fit.prevExercise, enabled: !locked && exIdx > 0),
+        const SizedBox(width: 10),
+        Expanded(child: _mainAction(gc, ex, exIdx, s.exercises.length, locked)),
+        const SizedBox(width: 10),
+        _circleBtn(gc, Ic.chevronRightBold, fit.nextExercise,
+            enabled: !locked && exIdx < s.exercises.length - 1),
+      ]),
+      const SizedBox(height: 10),
+      _guard(
+        locked,
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          if (ex != null && s.exercises.length > 1) ...[
+            Flexible(
+              child: _textAction(gc, t.dropExerciseAction,
+                  () => _confirmDrop(context, exIdx, t.catalogName(ex.id, ex.name))),
+            ),
+            Container(width: 1, height: 12, color: gc.border),
+          ],
+          Flexible(child: _textAction(gc, titleCase(t.finishSession), fit.finishSession)),
+        ]),
+      ),
+    ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -104,153 +261,73 @@ class SessionScreen extends StatelessWidget {
           _deloadNote(gc),
           const SizedBox(height: 14),
         ],
-        _ExerciseStage(
-          index: exIdx,
-          haptic: true,
-          autoMoves: fit.autoMoves,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              if (demo == 'small')
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(child: _exerciseHeader(context, gc, ex)),
-                    const SizedBox(width: 14),
-                    SizedBox(
-                      width: 104,
-                      child: _guard(
-                        locked,
-                        GestureDetector(
-                          onTap: () => showExercisePreview(context, def),
-                          child: ExerciseMedia(
-                              ex: def, height: 104, radius: 18, live: true, loops: loops),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              else
-                _exerciseHeader(context, gc, ex),
-              if (demo == 'large') ...[
-                const SizedBox(height: 14),
-                _guard(
-                  locked,
-                  GestureDetector(
-                    onTap: () => showExercisePreview(context, def),
-                    child: ExerciseMedia(ex: def, height: 170, live: true, loops: loops),
-                  ),
-                ),
-              ],
-            ],
-          ),
-        ),
-        const SizedBox(height: 18),
-        AnimatedSize(
-          duration: const Duration(milliseconds: 320),
-          curve: Curves.easeOutCubic,
-          alignment: Alignment.topCenter,
-          child: fit.holding && fit.holdEx == exIdx
-              ? Padding(padding: const EdgeInsets.only(bottom: 16), child: _holdCard(gc))
-              : s.restRemaining != null
-                  ? Padding(padding: const EdgeInsets.only(bottom: 16), child: _restCard(context, gc, s))
-                  : const SizedBox(width: double.infinity),
-        ),
-        _ExerciseStage(
-          index: exIdx,
-          child: Container(
-            padding: const EdgeInsets.fromLTRB(_cardPad, 16, _cardPad, 16),
-            decoration: BoxDecoration(
-              color: gc.bgRaised,
-              borderRadius: BorderRadius.circular(20),
-            ),
+        if (flex)
+          SizedBox(
+            height: (MediaQuery.sizeOf(context).height - 220).clamp(320.0, 720.0),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(_rowPad, 0, _rowPad, 10),
-                  child: _setsHeader(gc, mode, repsOnly, ex != null && (fit.isEachSide(ex.id) || fit.isSidedReps(ex.id)), exId: ex?.id),
+                Expanded(
+                  child: SingleChildScrollView(
+                    key: const PageStorageKey('session-flex-top'),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: stageAndTimers,
+                    ),
+                  ),
                 ),
-                for (int j = 0; j < (ex?.sets.length ?? 0); j++) ...[
-                  _swipeSet(context, gc, exIdx, j, ex!.sets[j], locked,
-                      _setRow(gc, exIdx, j, ex.sets[j], repsOnly, locked)),
-                ],
-                if (!repsOnly && mode.isEmpty && ex != null) _guard(locked, _plateRow(context, gc, ex)),
-                const SizedBox(height: 10),
-                _guard(
-                  locked,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: _rowPad),
-                    child: Row(
-                      children: [
-                        Expanded(child: _dashedAction(gc, t.addSet, () => fit.addSet(exIdx))),
-                        if (second != null) ...[
-                          const SizedBox(width: 8),
-                          Expanded(child: second),
-                        ],
-                      ],
+                Container(
+                  height: 6,
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    color: gc.bgRaised,
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: Center(
+                    child: Container(
+                      width: 48,
+                      height: 2,
+                      decoration: BoxDecoration(
+                        color: gc.ember.withValues(alpha: 0.6),
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    key: const PageStorageKey('session-flex-bottom'),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: setsAndControls,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-        ),
-        const SizedBox(height: 22),
-        _guard(
-          locked,
+          )
+        else if (wideFold)
           Row(
-          children: [
-            Expanded(
-              child: GhostButton(
-                label: t.addExercise,
-                icon: PhosphorIconsRegular.plus,
-                onTap: () => showAddToSessionSheet(context),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Semantics(
-              button: true,
-              label: t.addNote,
-              child: GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => ex == null ? fit.openNoteEditor() : showWorkoutNoteEditor(context, ex.id),
-                child: Container(
-                  width: 46,
-                  height: 46,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(PhosphorIconsRegular.notePencil, size: 17, color: gc.ember),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: stageAndTimers,
                 ),
               ),
-            ),
-          ],
-          ),
-        ),
-        const SizedBox(height: 16),
-        Row(children: [
-          _circleBtn(gc, Ic.chevronLeft, fit.prevExercise, enabled: !locked && exIdx > 0),
-          const SizedBox(width: 10),
-          Expanded(child: _mainAction(gc, ex, exIdx, s.exercises.length, locked)),
-          const SizedBox(width: 10),
-          _circleBtn(gc, Ic.chevronRightBold, fit.nextExercise,
-              enabled: !locked && exIdx < s.exercises.length - 1),
-        ]),
-        const SizedBox(height: 10),
-        _guard(
-          locked,
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            if (ex != null && s.exercises.length > 1) ...[
-              Flexible(
-                child: _textAction(gc, t.dropExerciseAction,
-                    () => _confirmDrop(context, exIdx, t.catalogName(ex.id, ex.name))),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: setsAndControls,
+                ),
               ),
-              Container(width: 1, height: 12, color: gc.border),
             ],
-            Flexible(child: _textAction(gc, titleCase(t.finishSession), fit.finishSession)),
-          ]),
-        ),
+          )
+        else ...[
+          ...stageAndTimers,
+          ...setsAndControls,
+        ],
       ],
     );
   }

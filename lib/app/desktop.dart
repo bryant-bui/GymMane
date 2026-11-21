@@ -1,29 +1,46 @@
 import 'dart:math' as math;
+import 'dart:ui' show DisplayFeatureState, DisplayFeatureType;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class DesktopScope extends InheritedWidget {
-  const DesktopScope({super.key, required this.wide, required super.child});
+  const DesktopScope({super.key, required this.wide, this.flex = false, required super.child});
 
   final bool wide;
+  final bool flex;
 
   static const minWidth = 1000.0;
   static const sidebarWidth = 252.0;
+  static const sidebarCollapsedWidth = 88.0;
   static const readingWidth = 760.0;
   static const flowWidth = 1600.0;
 
   @visibleForTesting
   static bool forceWide = false;
 
-  static bool wideFor(double width) => (kIsWeb || forceWide) && width >= minWidth;
+  static bool wideFor(double width, [double height = 800]) =>
+      ((kIsWeb || forceWide) && width >= minWidth) ||
+      (width >= 760.0 && height >= 540.0 && width > height);
+
+  static bool foldableFor(double width) => width >= 580.0;
+
+  static bool flexFor(MediaQueryData media) => media.displayFeatures.any(
+        (f) =>
+            (f.type == DisplayFeatureType.hinge || f.type == DisplayFeatureType.fold) &&
+            f.state == DisplayFeatureState.postureHalfOpened,
+      );
 
   static bool of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<DesktopScope>()?.wide ?? false;
 
+  static bool flexOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<DesktopScope>()?.flex ?? false;
+
   @override
-  bool updateShouldNotify(DesktopScope oldWidget) => oldWidget.wide != wide;
+  bool updateShouldNotify(DesktopScope oldWidget) =>
+      oldWidget.wide != wide || oldWidget.flex != flex;
 }
 
 class FlowWide extends ParentDataWidget<CardFlowData> {
@@ -71,8 +88,10 @@ class CardFlow extends MultiChildRenderObjectWidget {
   final int maxColumns;
   final double gap;
 
-  static int columnsFor(double width, {double minColumn = 360, int maxColumns = 3, double gap = 22}) =>
-      math.max(1, math.min(maxColumns, ((width + gap) / (minColumn + gap)).floor()));
+  static int columnsFor(double width, {double minColumn = 360, int maxColumns = 3, double gap = 22}) {
+    final effectiveMin = (width >= 540 && width < 760 && minColumn > 260) ? 260.0 : minColumn;
+    return math.max(1, math.min(maxColumns, ((width + gap) / (effectiveMin + gap)).floor()));
+  }
 
   @override
   RenderObject createRenderObject(BuildContext context) => RenderCardFlow(

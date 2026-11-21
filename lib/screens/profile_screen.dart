@@ -535,13 +535,28 @@ class _ProfileScreenState extends State<ProfileScreen> with SingleTickerProvider
             padding: const EdgeInsets.fromLTRB(12, 10, 4, 4),
             child: Row(
               children: [
-                Text(title, style: AppTheme.f(14, weight: FontWeight.w700, color: gc.text)),
-                if (count != null) ...[
-                  const SizedBox(width: 7),
-                  Text(count, style: AppTheme.f(14, weight: FontWeight.w700, color: gc.textTertiary)),
+                Expanded(
+                  child: Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          title,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: AppTheme.f(14, weight: FontWeight.w700, color: gc.text),
+                        ),
+                      ),
+                      if (count != null) ...[
+                        const SizedBox(width: 7),
+                        Text(count, style: AppTheme.f(14, weight: FontWeight.w700, color: gc.textTertiary)),
+                      ],
+                    ],
+                  ),
+                ),
+                if (onMore != null) ...[
+                  const SizedBox(width: 6),
+                  _seeAll(gc, onMore),
                 ],
-                const Spacer(),
-                if (onMore != null) _seeAll(gc, onMore),
               ],
             ),
           ),
