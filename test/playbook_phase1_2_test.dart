@@ -92,25 +92,35 @@ void main() {
     expect(r.ladders.single, ['incline-row', 'kiJ4Z2K', 'negative-pull-up', 'lBDjFxJ']);
   });
 
-  test('all 3 Playbook templates (warm-up + 15 levels) are first and non-playbook calis templates are removed', () {
-    expect(kProgramTemplates.any((p) => p.id == 'calis-skills' || p.id == 'calis-ppl' || p.id == 'street-weighted'),
-        isFalse);
-    final pbTemplates = kProgramTemplates.take(3).toList();
-    expect(pbTemplates.map((p) => p.id).toList(), ['pb-push', 'pb-pull', 'pb-squat']);
-    for (final tpl in pbTemplates) {
-      fit.resetAllData();
-      fit.onboarded = true;
-      final made = fit.applyTemplate(tpl);
-      final expected = tpl.id == 'pb-push' ? 5 : 6;
-      expect(made, expected, reason: '${tpl.id} should create $expected routines');
-      expect(fit.routines.length, expected);
-      expect(tpl.days.any((d) => d.name == 'Push-Ups · Warm-up'), isFalse);
-      for (var i = 0; i < expected; i++) {
-        expect(fit.routines[i].exerciseIds.length, tpl.days[i].entries.length,
-            reason: 'Missing exercise in ${tpl.days[i].name}');
+  test(
+    'all 3 Playbook templates (warm-up + 15 levels) are registered and non-playbook calis templates are removed',
+    () {
+      expect(
+        kProgramTemplates.any(
+          (p) => p.id == 'calis-skills' || p.id == 'calis-ppl' || p.id == 'street-weighted',
+        ),
+        isFalse,
+      );
+      final pbTemplates = kProgramTemplates.where((p) => p.id.startsWith('pb-')).toList();
+      expect(pbTemplates.map((p) => p.id).toList(), ['pb-push', 'pb-pull', 'pb-squat']);
+      for (final tpl in pbTemplates) {
+        fit.resetAllData();
+        fit.onboarded = true;
+        final made = fit.applyTemplate(tpl);
+        final expected = tpl.id == 'pb-push' ? 5 : 6;
+        expect(made, expected, reason: '${tpl.id} should create $expected routines');
+        expect(fit.routines.length, expected);
+        expect(tpl.days.any((d) => d.name == 'Push-Ups · Warm-up'), isFalse);
+        for (var i = 0; i < expected; i++) {
+          expect(
+            fit.routines[i].exerciseIds.length,
+            tpl.days[i].entries.length,
+            reason: 'Missing exercise in ${tpl.days[i].name}',
+          );
+        }
       }
-    }
-  });
+    },
+  );
 
   test('Calisthenics skill catalog, progressions, templates and outdoors preset are registered', () {
     expect(fit.modeOf('tuck-planche'), 'time');
@@ -130,12 +140,12 @@ void main() {
     ]);
     expect(kFilterEquipment.take(4), ['Bodyweight', 'Rings', 'Weighted', 'Band']);
     expect(kPlacePresets.first, 'outdoors');
-    expect(kProgramTemplates.first.id, 'pb-push');
+    expect(kProgramTemplates.first.id, 'fullbody');
+    expect(kProgramTemplates.map((p) => p.id), containsAll(['pb-push', 'pb-pull', 'pb-squat']));
   });
 
   test('playbookLevelUpHint suggests next level when progression gate is met', () {
-    setAppLanguage('vi');
-    addTearDown(() => setAppLanguage('en'));
+    setAppLanguage('en');
     fit.applyTemplate(kProgramTemplates.firstWhere((p) => p.id == 'pb-push'));
     final l1 = fit.routines.firstWhere((r) => r.name == 'Push-Ups · Level 1');
     fit.startRoutine(l1);
