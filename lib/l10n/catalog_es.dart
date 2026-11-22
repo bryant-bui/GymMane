@@ -1800,11 +1800,11 @@ const Map<String, List<String>> kExerciseStepsEs = {
     'Aguanta un momento abajo y empuja con los talones para volver a la posición inicial.',
   ],
   'bZq4bwK': [
-    'Siéntate en el borde de un banco o una silla agarrando el borde junto a la cadera.',
-    'Desliza el culo por delante del banco, con las piernas estiradas hacia delante.',
-    'Mantén la espalda pegada al banco y los codos algo flexionados.',
-    'Baja el cuerpo flexionando los codos hasta que los brazos queden paralelos al suelo.',
-    'Empuja para volver a la posición inicial estirando los brazos.',
+    'Sujeta un disco a un cinturón de lastre en la cintura o sostén una mancuerna entre los tobillos.',
+    'Agarra las barras paralelas y empújate hasta quedar arriba con los brazos estirados y el tronco erguido.',
+    'Mantén los codos pegados a los costados y baja el cuerpo de forma controlada.',
+    'Desciende hasta que la parte superior de los brazos quede paralela al suelo o algo por debajo.',
+    'Empuja con fuerza las barras para estirar los brazos y volver a la posición inicial.',
   ],
   'pec-deck': [
     'Siéntate en la contractora con la espalda pegada al respaldo y los pies apoyados.',
