@@ -1761,11 +1761,11 @@ const Map<String, List<String>> kExerciseStepsVi = {
     'Lặp lại theo số lần lặp mong muốn.',
   ],
   'bZq4bwK': [
-    'Ngồi trên mép ghế tập hoặc ghế chắc chắn, hai tay nắm chặt mép ghế ngay cạnh hông.',
-    'Trượt mông ra khỏi mép trước của ghế với hai chân duỗi thẳng về phía trước.',
-    'Giữ lưng sát gần ghế và khuỷu tay hơi chùng nhẹ.',
-    'Hạ thân người xuống bằng cách gập khuỷu tay cho đến khi bắp tay trên song song với sàn.',
-    'Đẩy người trở lại vị trí ban đầu bằng cách duỗi thẳng hai tay.',
+    'Gắn bánh tạ vào đai tập quanh eo hoặc kẹp chắc một quả tạ đơn giữa hai cổ chân.',
+    'Nắm chắc hai thanh xà kép và đẩy người lên tư thế chống đỡ với hai tay duỗi thẳng, thân người giữ thẳng đứng.',
+    'Giữ hai khuỷu tay khép sát hai bên sườn và hạ thấp cơ thể một cách có kiểm soát.',
+    'Hạ người xuống cho đến khi bắp tay trên song song với mặt sàn hoặc sâu hơn một chút.',
+    'Đẩy mạnh qua hai thanh xà để duỗi thẳng tay và trở lại vị trí cao nhất.',
   ],
   'OTgkHwR': [
     'Nằm trên ghế dốc xuống sao cho đầu thấp hơn chân, mỗi tay cầm một quả tạ đơn, hai lòng bàn tay hướng vào nhau.',
