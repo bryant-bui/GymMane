@@ -4048,11 +4048,11 @@ const List<Exercise> kExercises = [
     difficulty: 'Intermediate',
     art: 'weighted-dip',
     steps: [
-      'Sit on the edge of a bench or chair with your hands gripping the edge next to your hips.',
-      'Slide your butt off the front of the bench with your legs extended in front of you.',
-      'Keep your back close to the bench and your elbows slightly bent.',
-      'Lower your body by bending your elbows until your upper arms are parallel to the floor.',
-      'Push yourself back up to the starting position by straightening your arms.',
+      'Fasten a weight plate to a dip belt around your waist or hold a dumbbell between your ankles.',
+      'Grip the parallel bars and press up into support with your arms locked straight and torso upright.',
+      'Keep your elbows tucked close to your sides and lower your body under control.',
+      'Descend until your upper arms are parallel to the floor or slightly below.',
+      'Press strongly through the bars to straighten your arms and return to the top.',
     ],
   ),
   Exercise(
@@ -8171,14 +8171,7 @@ const Set<String> kCardioExtras = {
 };
 
 const List<List<String>> kProgressions = [
-  [
-    'planche-lean',
-    'frog-stand',
-    'tuck-planche',
-    'adv-tuck-planche',
-    'straddle-planche',
-    'full-planche',
-  ],
+  ['planche-lean', 'frog-stand', 'tuck-planche', 'adv-tuck-planche', 'straddle-planche', 'full-planche'],
   [
     'tuck-front-lever',
     'adv-tuck-front-lever',
@@ -8186,29 +8179,10 @@ const List<List<String>> kProgressions = [
     'straddle-front-lever',
     'full-front-lever',
   ],
-  [
-    'skin-the-cat',
-    'tuck-back-lever',
-    'adv-tuck-back-lever',
-    'straddle-back-lever',
-    'full-back-lever',
-  ],
-  [
-    'wall-handstand-hold',
-    'freestanding-handstand',
-    'wall-handstand-push-up',
-    'handstand-push-up',
-  ],
-  [
-    'high-pull-up',
-    'band-muscle-up',
-    'bar-muscle-up',
-    'rNGemus',
-  ],
-  [
-    'tuck-human-flag',
-    'human-flag-hold',
-  ],
+  ['skin-the-cat', 'tuck-back-lever', 'adv-tuck-back-lever', 'straddle-back-lever', 'full-back-lever'],
+  ['wall-handstand-hold', 'freestanding-handstand', 'wall-handstand-push-up', 'handstand-push-up'],
+  ['high-pull-up', 'band-muscle-up', 'bar-muscle-up', 'rNGemus'],
+  ['tuck-human-flag', 'human-flag-hold'],
   [
     'wall-push-up',
     'incline-push-up',

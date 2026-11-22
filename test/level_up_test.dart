@@ -10,6 +10,7 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   const pushUp = 'I4hDWkc';
+  const nextPushUp = 'wide-push-up';
   const diamond = 'x6KpKpq';
 
   setUp(() async {
@@ -50,8 +51,8 @@ void main() {
     for (final id in all) {
       expect(fit.exerciseById(id), isNotNull, reason: id);
     }
-    expect(nextStepOf(pushUp), diamond);
-    expect(nextStepOf('pseudo-planche-push-up'), isNull);
+    expect(nextStepOf(pushUp), nextPushUp);
+    expect(nextStepOf('one-arm-push-up'), isNull);
   });
 
   test('un solo buen día no basta: hacen falta dos entrenos seguidos', () {
@@ -60,7 +61,7 @@ void main() {
     expect(fit.summaryLevelUp, isNull);
     fit.saveAndExit();
     workout(r, 9);
-    expect(fit.summaryLevelUp?.to.id, diamond);
+    expect(fit.summaryLevelUp?.to.id, nextPushUp);
   });
 
   test('si una de las veces no llega a 3×8 no se sugiere', () {
@@ -88,8 +89,8 @@ void main() {
     workout(r, 8);
     expect(fit.levelUpInRoutine, isTrue);
     expect(fit.levelUpSwap(), 'Calistenia');
-    expect(r.exerciseIds, [diamond, '6YUfHPL']);
-    expect(fit.routineSets(r, diamond), sets);
+    expect(r.exerciseIds, [nextPushUp, '6YUfHPL']);
+    expect(fit.routineSets(r, nextPushUp), sets);
     expect(fit.summaryLevelUp, isNull);
   });
 
@@ -113,7 +114,7 @@ void main() {
     fit.saveAndExit();
     fit.deleteSession(fit.sessions.last);
     workout(r, 8);
-    expect(fit.summaryLevelUp?.to.id, diamond);
+    expect(fit.summaryLevelUp?.to.id, nextPushUp);
   });
 
   test('borrar otro entreno no la vuelve a sacar', () {
@@ -139,7 +140,7 @@ void main() {
     expect(fit.levelStay, contains(pushUp));
     undo();
     expect(fit.levelStay, isNot(contains(pushUp)));
-    expect(fit.summaryLevelUp?.to.id, diamond);
+    expect(fit.summaryLevelUp?.to.id, nextPushUp);
   });
 
   test('seguir entrenando no gasta la sugerencia', () {
@@ -151,7 +152,7 @@ void main() {
     fit.continueSession();
     expect(fit.summaryLevelUp, isNull);
     fit.finishSession();
-    expect(fit.summaryLevelUp?.to.id, diamond);
+    expect(fit.summaryLevelUp?.to.id, nextPushUp);
   });
 
   test('con el ajuste apagado nunca sale', () {
@@ -195,7 +196,9 @@ void main() {
 
     test('la de la rutina manda sobre la de la app y puede meter un paso que falta', () {
       final r = routineWith(['uTBt1HV']);
-      final hang = fit.matchExerciseByName('Dead Hang')?.id ?? fit.allExercises.firstWhere((e) => e.primary == 'back').id;
+      final hang =
+          fit.matchExerciseByName('Dead Hang')?.id ??
+          fit.allExercises.firstWhere((e) => e.primary == 'back').id;
       fit.setLadder(r.id, 'uTBt1HV', ['uTBt1HV', hang, 'negative-pull-up']);
       expect(nextStepOf('uTBt1HV'), 'negative-pull-up');
       expect(fit.nextStepIn(r, 'uTBt1HV'), hang);
@@ -208,9 +211,13 @@ void main() {
       fit.persistNow();
       fit.loadFromStore();
       final back = fit.routineById(r.id)!;
-      expect(back.ladders, [[pushUp, diamond]]);
+      expect(back.ladders, [
+        [pushUp, diamond],
+      ]);
       final copy = fit.routineById(fit.duplicateRoutine(r.id))!;
-      expect(copy.ladders, [[pushUp, diamond]]);
+      expect(copy.ladders, [
+        [pushUp, diamond],
+      ]);
       fit.setLadder(r.id, pushUp, [pushUp]);
       expect(fit.routineById(r.id)!.ladders, isEmpty);
     });

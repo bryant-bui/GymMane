@@ -1,4 +1,3 @@
-
 const Map<String, String> kExerciseNameIt = {
   'EIeI8Vf': 'Panca piana con bilanciere',
   'SpYC0Kp': 'Panca piana con manubri',
@@ -2102,11 +2101,11 @@ const Map<String, List<String>> kExerciseStepsIt = {
     'Ripeti per il numero di ripetizioni voluto.',
   ],
   'bZq4bwK': [
-    'Siediti sul bordo di una panca o di una sedia con le mani aggrappate al bordo vicino ai fianchi.',
-    'Fai scivolare i glutei oltre il bordo anteriore della panca con le gambe tese davanti a te.',
-    'Tieni la schiena vicina alla panca e i gomiti leggermente piegati.',
-    'Abbassa il corpo piegando i gomiti finché la parte alta delle braccia è parallela al pavimento.',
-    "Spingiti di nuovo verso l'alto raddrizzando le braccia.",
+    'Fissa un disco a una cintura da zavorra in vita o tieni un manubrio tra le caviglie.',
+    'Afferra le parallele e spingiti in appoggio con le braccia tese e il busto eretto.',
+    'Tieni i gomiti vicini ai fianchi e abbassa il corpo in modo controllato.',
+    'Scendi finché la parte alta delle braccia è parallela al pavimento o poco sotto.',
+    'Spingi con forza sulle barre per distendere le braccia e tornare in alto.',
   ],
   'OTgkHwR': [
     "Sdraiati su una panca declinata con la testa più in basso dei piedi e tieni un manubrio in ogni mano, palmi uno di fronte all'altro.",

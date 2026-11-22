@@ -2233,11 +2233,11 @@ const Map<String, List<String>> kExerciseStepsPt = {
     'Repita o movimento pelo número desejado de repetições.',
   ],
   'bZq4bwK': [
-    'Sente-se na borda de um banco ou cadeira e segure a borda ao lado do quadril.',
-    'Deslize o quadril para fora da parte da frente do banco, mantendo as pernas estendidas à frente.',
-    'Mantenha as costas próximas ao banco e os cotovelos levemente flexionados.',
-    'Flexione os cotovelos e abaixe o corpo até que os braços superiores fiquem paralelos ao chão.',
-    'Empurre o corpo de volta à posição inicial, estendendo os braços.',
+    'Prenda uma anilha a um cinto de lastro na cintura ou segure um halter entre os tornozelos.',
+    'Segure as barras paralelas e empurre o corpo para cima até ficar com os braços estendidos e o tronco ereto.',
+    'Mantenha os cotovelos próximos às laterais do corpo e desça de forma controlada.',
+    'Desça até que os braços superiores fiquem paralelos ao chão ou ligeiramente abaixo.',
+    'Empurre as barras com firmeza para estender os braços e retornar ao topo.',
   ],
   'OTgkHwR': [
     'Deite-se no banco declinado, com a cabeça abaixo dos pés, segurando um halter em cada mão e as palmas voltadas uma para a outra.',
